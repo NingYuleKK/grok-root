@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ 万花筒 Kaleidoscope</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0f;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        canvas {
+            border-radius: 50%;
+            box-shadow: 
+                0 0 60px rgba(120, 80, 200, 0.3),
+                0 0 100px rgba(80, 120, 200, 0.2);
+        }
+        
+        .controls {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            width: 280px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .control-group {
+            margin-bottom: 20px;
+        }
+        
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+        
+        .control-group label span.value {
+            color: #fff;
+            font-weight: 500;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            appearance: none;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a78bfa, #6366f1);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(139, 92, 246, 0.5);
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        select option {
+            background: #1a1a2e;
+            color: #fff;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 24px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px 0;
+        }
+        
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .preset-btn {
+            padding: 8px;
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+        
+        .preset-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>✨ 万 花 筒</h1>
+    
+    <div class="container">
+        <canvas id="kaleidoscope" width="500" height="500"></canvas>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>对称轴 Symmetry <span class="value" id="symmetryVal">8</span></label>
+                <input type="range" id="symmetry" min="3" max="24" value="8">
+            </div>
+            
+            <div class="control-group">
+                <label>层数 Layers <span class="value" id="layersVal">5</span></label>
+                <input type="range" id="layers" min="1" max="10" value="5">
+            </div>
+            
+            <div class="control-group">
+                <label>密度 Density <span class="value" id="densityVal">8</span></label>
+                <input type="range" id="density" min="3" max="20" value="8">
+            </div>
+            
+            <div class="control-group">
+                <label>旋转速度 Rotation <span class="value" id="rotationVal">50</span></label>
+                <input type="range" id="rotation" min="0" max="100" value="50">
+            </div>
+            
+            <div class="control-group">
+                <label>呼吸感 Breathing <span class="value" id="breathingVal">30</span></label>
+                <input type="range" id="breathing" min="0" max="100" value="30">
+            </div>
+            
+            <div class="control-group">
+                <label>色彩模式 Color Mode</label>
+                <select id="colorMode">
+                    <option value="rainbow">🌈 彩虹 Rainbow</option>
+                    <option value="ocean">🌊 海洋 Ocean</option>
+                    <option value="sunset">🌅 日落 Sunset</option>
+                    <option value="forest">🌲 森林 Forest</option>
+                    <option value="cosmic">🌌 宇宙 Cosmic</option>
+                    <option value="monochrome">⚪ 单色 Monochrome</option>
+                    <option value="mucha">🌸 穆夏 Mucha</option>
+                    <option value="gothic">🖤 哥特 Gothic</option>
+                    <option value="cyberpunk">💜 赛博朋克 Cyber</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>形状 Shape</label>
+                <select id="shape">
+                    <option value="mixed">✨ 混合 Mixed</option>
+                    <option value="circles">⭕ 圆形 Circles</option>
+                    <option value="polygons">🔷 多边形 Polygons</option>
+                    <option value="petals">🌸 花瓣 Petals</option>
+                    <option value="stars">⭐ 星形 Stars</option>
+                    <option value="topo-mixed">🔮 拓扑混合 Topo Mix</option>
+                    <option value="lissajous">〰️ 利萨如 Lissajous</option>
+                    <option value="spiral">🌀 螺旋 Spiral</option>
+                    <option value="mobius">♾️ 莫比乌斯 Möbius</option>
+                    <option value="trefoil">🥨 三叶结 Trefoil</option>
+                    <option value="torus">🍩 环面 Torus</option>
+                    <option value="roman">🏛️ 罗马曲面 Roman</option>
+                    <option value="vine">🌿 藤蔓 Vine</option>
+                    <option value="arch">⛪ 尖拱 Gothic Arch</option>
+                    <option value="glitch">📺 故障 Glitch</option>
+                    <option value="circuit">🔌 电路 Circuit</option>
+                </select>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <label style="font-size: 0.8rem; color: #888; margin-bottom: 10px; display: block;">预设 Presets</label>
+            <div class="preset-buttons">
+                <button class="preset-btn" onclick="applyPreset('zen')">🧘 禅意</button>
+                <button class="preset-btn" onclick="applyPreset('chaos')">🌀 混沌</button>
+                <button class="preset-btn" onclick="applyPreset('bloom')">🌺 绽放</button>
+                <button class="preset-btn" onclick="applyPreset('crystal')">💎 水晶</button>
+                <button class="preset-btn" onclick="applyPreset('topology')">🔮 拓扑</button>
+                <button class="preset-btn" onclick="applyPreset('roman')">🏛️ 罗马</button>
+                <button class="preset-btn" onclick="applyPreset('mucha')">🌸 穆夏</button>
+                <button class="preset-btn" onclick="applyPreset('gothic')">⛪ 哥特</button>
+                <button class="preset-btn" onclick="applyPreset('cyber')">💜 赛博</button>
+            </div>
+            
+            <div class="buttons">
+                <button class="btn-secondary" onclick="randomize()">🎲 随机</button>
+                <button class="btn-primary" onclick="saveImage()">💾 保存</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('kaleidoscope');
+        const ctx = canvas.getContext('2d');
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        
+        // Parameters
+        let params = {
+            symmetry: 8,
+            layers: 5,
+            density: 8,
+            rotation: 50,
+            breathing: 30,
+            colorMode: 'rainbow',
+            shape: 'mixed'
+        };
+        
+        // Animation state
+        let time = 0;
+        let shapes = [];
+        
+        // Color palettes
+        const palettes = {
+            rainbow: ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd', '#00d2d3'],
+            ocean: ['#0077b6', '#00b4d8', '#90e0ef', '#caf0f8', '#023e8a', '#03045e', '#48cae4'],
+            sunset: ['#ff7b00', '#ff8800', '#ff9500', '#ffa200', '#ffaa00', '#ff5400', '#ff6d00'],
+            forest: ['#2d6a4f', '#40916c', '#52b788', '#74c69d', '#95d5b2', '#b7e4c7', '#1b4332'],
+            cosmic: ['#7400b8', '#6930c3', '#5e60ce', '#5390d9', '#4ea8de', '#48bfe3', '#56cfe1'],
+            monochrome: ['#f8f9fa', '#e9ecef', '#dee2e6', '#ced4da', '#adb5bd', '#6c757d', '#495057'],
+            // 艺术风格
+            mucha: ['#d4a574', '#c9b896', '#8b7355', '#f0e6d3', '#a67c52', '#e8d4b8', '#bf9b6f', '#c8a27c', '#dfc5a0'],
+            gothic: ['#1a0a0a', '#4a0e0e', '#8b0000', '#2d0a31', '#c9a227', '#3d0c02', '#1c1c3c', '#800020'],
+            cyberpunk: ['#ff00ff', '#00ffff', '#ff0080', '#80ff00', '#ff00ff', '#0080ff', '#ff8000', '#00ff80', '#8000ff']
+        };
+        
+        // Generate shapes for the kaleidoscope
+        function generateShapes() {
+            shapes = [];
+            const palette = palettes[params.colorMode];
+            
+            const topoTypes = ['lissajous', 'spiral', 'mobius', 'trefoil', 'torus', 'roman'];
+            const basicTypes = ['circle', 'polygon', 'petal', 'star'];
+            const artTypes = ['vine', 'arch', 'glitch', 'circuit'];
+            const allTypes = [...basicTypes, ...topoTypes, ...artTypes];
+            
+            for (let layer = 0; layer < params.layers; layer++) {
+                for (let i = 0; i < params.density; i++) {
+                    const baseRadius = 30 + layer * 40;
+                    
+                    let shapeType;
+                    if (params.shape === 'mixed') {
+                        shapeType = basicTypes[Math.floor(Math.random() * basicTypes.length)];
+                    } else if (params.shape === 'topo-mixed') {
+                        shapeType = topoTypes[Math.floor(Math.random() * topoTypes.length)];
+                    } else if (params.shape === 'art-mixed') {
+                        shapeType = artTypes[Math.floor(Math.random() * artTypes.length)];
+                    } else if (params.shape.endsWith('s') && basicTypes.includes(params.shape.slice(0, -1))) {
+                        shapeType = params.shape.slice(0, -1);
+                    } else {
+                        shapeType = params.shape;
+                    }
+                    
+                    shapes.push({
+                        layer: layer,
+                        angle: (i / params.density) * Math.PI * 2 + layer * 0.3,
+                        radius: baseRadius + Math.random() * 30,
+                        size: 10 + Math.random() * 25,
+                        color: palette[Math.floor(Math.random() * palette.length)],
+                        type: shapeType,
+                        sides: 3 + Math.floor(Math.random() * 5),
+                        phase: Math.random() * Math.PI * 2,
+                        // 拓扑形状参数
+                        topoA: 1 + Math.floor(Math.random() * 5),
+                        topoB: 1 + Math.floor(Math.random() * 5),
+                        topoPhase: Math.random() * Math.PI,
+                        topoTurns: 2 + Math.random() * 3,
+                        topoRatio: 0.3 + Math.random() * 0.4,
+                        // 艺术风格参数
+                        vineWaves: 2 + Math.floor(Math.random() * 4),
+                        glitchSlices: 3 + Math.floor(Math.random() * 5),
+                        circuitNodes: 3 + Math.floor(Math.random() * 5)
+                    });
+                }
+            }
+        }
+        
+        // Draw a single shape
+        function drawShape(shape, x, y, size) {
+            ctx.fillStyle = shape.color;
+            ctx.strokeStyle = shape.color;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            
+            switch(shape.type) {
+                case 'circle':
+                    ctx.arc(x, y, size, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+                    
+                case 'polygon':
+                    for (let i = 0; i < shape.sides; i++) {
+                        const angle = (i / shape.sides) * Math.PI * 2 - Math.PI / 2;
+                        const px = x + Math.cos(angle) * size;
+                        const py = y + Math.sin(angle) * size;
+                        if (i === 0) ctx.moveTo(px, py);
+                        else ctx.lineTo(px, py);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                    break;
+                    
+                case 'petal':
+                    ctx.ellipse(x, y, size * 0.4, size, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+                    
+                case 'star':
+                    const spikes = 5;
+                    const outerRadius = size;
+                    const innerRadius = size * 0.5;
+                    for (let i = 0; i < spikes * 2; i++) {
+                        const r = i % 2 === 0 ? outerRadius : innerRadius;
+                        const angle = (i / (spikes * 2)) * Math.PI * 2 - Math.PI / 2;
+                        const px = x + Math.cos(angle) * r;
+                        const py = y + Math.sin(angle) * r;
+                        if (i === 0) ctx.moveTo(px, py);
+                        else ctx.lineTo(px, py);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                    break;
+                
+                // === 拓扑形状 ===
+                
+                case 'lissajous':
+                    // 利萨如曲线 - 参数化的优美闭合曲线
+                    const a = shape.topoA || 3;
+                    const b = shape.topoB || 2;
+                    const delta = shape.topoPhase || Math.PI / 2;
+                    ctx.beginPath();
+                    for (let t = 0; t <= Math.PI * 2; t += 0.05) {
+                        const lx = x + Math.sin(a * t + delta) * size;
+                        const ly = y + Math.sin(b * t) * size;
+                        if (t === 0) ctx.moveTo(lx, ly);
+                        else ctx.lineTo(lx, ly);
+                    }
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.globalAlpha *= 0.3;
+                    ctx.fill();
+                    break;
+                    
+                case 'spiral':
+                    // 对数螺旋 - 自然界中常见的形态
+                    const turns = shape.topoTurns || 3;
+                    const growth = 0.15;
+                    ctx.beginPath();
+                    for (let t = 0; t <= turns * Math.PI * 2; t += 0.1) {
+                        const r = size * 0.1 * Math.exp(growth * t);
+                        const sx = x + Math.cos(t) * r;
+                        const sy = y + Math.sin(t) * r;
+                        if (t === 0) ctx.moveTo(sx, sy);
+                        else ctx.lineTo(sx, sy);
+                    }
+                    ctx.stroke();
+                    break;
+                    
+                case 'mobius':
+                    // 莫比乌斯带的2D投影 - 8字形变体
+                    ctx.beginPath();
+                    for (let t = 0; t <= Math.PI * 2; t += 0.05) {
+                        const mx = x + size * Math.sin(t);
+                        const my = y + size * 0.5 * Math.sin(2 * t);
+                        if (t === 0) ctx.moveTo(mx, my);
+                        else ctx.lineTo(mx, my);
+                    }
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.globalAlpha *= 0.2;
+                    ctx.fill();
+                    break;
+                    
+                case 'trefoil':
+                    // 三叶结 - 最简单的非平凡纽结
+                    ctx.beginPath();
+                    for (let t = 0; t <= Math.PI * 2; t += 0.05) {
+                        const tx = x + size * (Math.sin(t) + 2 * Math.sin(2 * t)) * 0.35;
+                        const ty = y + size * (Math.cos(t) - 2 * Math.cos(2 * t)) * 0.35;
+                        if (t === 0) ctx.moveTo(tx, ty);
+                        else ctx.lineTo(tx, ty);
+                    }
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.globalAlpha *= 0.3;
+                    ctx.fill();
+                    break;
+                    
+                case 'torus':
+                    // 环面截面 - 同心变形圆
+                    const R = size;
+                    const rInner = size * (shape.topoRatio || 0.4);
+                    // 外圈
+                    ctx.beginPath();
+                    ctx.arc(x, y, R, 0, Math.PI * 2);
+                    ctx.stroke();
+                    // 内圈（偏移产生立体感）
+                    ctx.beginPath();
+                    ctx.arc(x + rInner * 0.3, y, rInner, 0, Math.PI * 2);
+                    ctx.stroke();
+                    // 连接线产生环面感
+                    ctx.globalAlpha *= 0.5;
+                    for (let i = 0; i < 8; i++) {
+                        const angle = (i / 8) * Math.PI * 2;
+                        ctx.beginPath();
+                        ctx.moveTo(x + Math.cos(angle) * R, y + Math.sin(angle) * R);
+                        ctx.lineTo(x + rInner * 0.3 + Math.cos(angle) * rInner, y + Math.sin(angle) * rInner);
+                        ctx.stroke();
+                    }
+                    break;
+                    
+                case 'roman':
+                    // 罗马曲面 (Steiner's Roman Surface) - 射影平面的美丽自交浸入
+                    // 画多条参数曲线来呈现其三叶自交结构
+                    const romanScale = size * 0.8;
+                    
+                    // 画几条v=常数的曲线（横向切片）
+                    for (let vi = 0; vi < 4; vi++) {
+                        const v = (vi / 4) * Math.PI;
+                        ctx.beginPath();
+                        for (let u = 0; u <= Math.PI * 2; u += 0.08) {
+                            // Steiner Roman Surface 参数方程的xy投影
+                            const rx = romanScale * Math.sin(2 * u) * Math.pow(Math.cos(v), 2);
+                            const ry = romanScale * Math.sin(u) * Math.sin(2 * v);
+                            const px = x + rx;
+                            const py = y + ry;
+                            if (u === 0) ctx.moveTo(px, py);
+                            else ctx.lineTo(px, py);
+                        }
+                        ctx.stroke();
+                    }
+                    
+                    // 画几条u=常数的曲线（纵向切片）产生网格感
+                    ctx.globalAlpha *= 0.6;
+                    for (let ui = 0; ui < 6; ui++) {
+                        const u = (ui / 6) * Math.PI * 2;
+                        ctx.beginPath();
+                        for (let v = 0; v <= Math.PI; v += 0.08) {
+                            const rx = romanScale * Math.sin(2 * u) * Math.pow(Math.cos(v), 2);
+                            const ry = romanScale * Math.sin(u) * Math.sin(2 * v);
+                            const px = x + rx;
+                            const py = y + ry;
+                            if (v === 0) ctx.moveTo(px, py);
+                            else ctx.lineTo(px, py);
+                        }
+                        ctx.stroke();
+                    }
+                    
+                    // 中心点强调自交
+                    ctx.globalAlpha *= 0.8;
+                    ctx.beginPath();
+                    ctx.arc(x, y, size * 0.08, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+                    
+                // === 艺术风格形状 ===
+                
+                case 'vine':
+                    // 穆夏风格藤蔓 - 优雅的有机曲线
+                    ctx.lineWidth = 1.5;
+                    const vineWaves = shape.vineWaves || 3;
+                    const vineAmp = size * 0.3;
+                    
+                    // 主茎
+                    ctx.beginPath();
+                    for (let t = 0; t <= 1; t += 0.02) {
+                        const vx = x + t * size * 1.5 - size * 0.75;
+                        const vy = y + Math.sin(t * Math.PI * vineWaves) * vineAmp;
+                        if (t === 0) ctx.moveTo(vx, vy);
+                        else ctx.lineTo(vx, vy);
+                    }
+                    ctx.stroke();
+                    
+                    // 卷须和小叶
+                    ctx.globalAlpha *= 0.7;
+                    for (let i = 0; i < 4; i++) {
+                        const t = (i + 1) / 5;
+                        const bx = x + t * size * 1.5 - size * 0.75;
+                        const by = y + Math.sin(t * Math.PI * vineWaves) * vineAmp;
+                        
+                        // 卷须螺旋
+                        ctx.beginPath();
+                        for (let s = 0; s <= Math.PI * 1.5; s += 0.1) {
+                            const curl = size * 0.15 * (1 - s / (Math.PI * 2));
+                            const cx = bx + Math.cos(s) * curl;
+                            const cy = by - Math.sin(s) * curl - s * 3;
+                            if (s === 0) ctx.moveTo(cx, cy);
+                            else ctx.lineTo(cx, cy);
+                        }
+                        ctx.stroke();
+                    }
+                    break;
+                    
+                case 'arch':
+                    // 哥特尖拱 - 玫瑰窗元素
+                    ctx.lineWidth = 2;
+                    const archHeight = size * 1.2;
+                    const archWidth = size * 0.8;
+                    
+                    // 尖拱轮廓
+                    ctx.beginPath();
+                    ctx.moveTo(x - archWidth/2, y + archHeight/2);
+                    
+                    // 左侧曲线
+                    ctx.quadraticCurveTo(
+                        x - archWidth/2, y - archHeight/3,
+                        x, y - archHeight/2
+                    );
+                    // 右侧曲线
+                    ctx.quadraticCurveTo(
+                        x + archWidth/2, y - archHeight/3,
+                        x + archWidth/2, y + archHeight/2
+                    );
+                    ctx.stroke();
+                    
+                    // 内部装饰 - 三叶草图案
+                    ctx.globalAlpha *= 0.6;
+                    const leafSize = size * 0.2;
+                    for (let i = 0; i < 3; i++) {
+                        const angle = (i / 3) * Math.PI * 2 - Math.PI/2;
+                        const lx = x + Math.cos(angle) * leafSize * 0.8;
+                        const ly = y - archHeight * 0.1 + Math.sin(angle) * leafSize * 0.8;
+                        ctx.beginPath();
+                        ctx.arc(lx, ly, leafSize * 0.4, 0, Math.PI * 2);
+                        ctx.stroke();
+                    }
+                    break;
+                    
+                case 'glitch':
+                    // 赛博朋克故障效果 - 错位的几何
+                    const glitchOffset = size * 0.15;
+                    const slices = 4 + Math.floor(shape.glitchSlices || 3);
+                    
+                    // 多层错位矩形
+                    for (let i = 0; i < slices; i++) {
+                        const sliceY = y - size/2 + (i / slices) * size;
+                        const sliceH = size / slices;
+                        const offset = (Math.random() - 0.5) * glitchOffset * 2;
+                        
+                        ctx.globalAlpha = 0.6 + Math.random() * 0.4;
+                        ctx.fillRect(x - size/2 + offset, sliceY, size, sliceH);
+                    }
+                    
+                    // RGB分离效果
+                    ctx.globalCompositeOperation = 'screen';
+                    ctx.globalAlpha = 0.5;
+                    ctx.fillStyle = '#ff0000';
+                    ctx.fillRect(x - size/2 - 2, y - size/3, size * 0.6, size * 0.2);
+                    ctx.fillStyle = '#00ffff';
+                    ctx.fillRect(x - size/2 + 2, y, size * 0.6, size * 0.2);
+                    ctx.globalCompositeOperation = 'source-over';
+                    ctx.fillStyle = shape.color;
+                    break;
+                    
+                case 'circuit':
+                    // 电路板图案 - 直角线条
+                    ctx.lineWidth = 2;
+                    const gridSize = size * 0.25;
+                    const nodes = shape.circuitNodes || 4;
+                    
+                    // 随机生成电路路径
+                    let cx = x - size/2;
+                    let cy = y;
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    
+                    for (let i = 0; i < nodes; i++) {
+                        // 只能走直角
+                        if (Math.random() > 0.5) {
+                            cx += gridSize * (Math.random() > 0.5 ? 1 : -1);
+                        } else {
+                            cy += gridSize * (Math.random() > 0.5 ? 1 : -1);
+                        }
+                        cx = Math.max(x - size/2, Math.min(x + size/2, cx));
+                        cy = Math.max(y - size/2, Math.min(y + size/2, cy));
+                        ctx.lineTo(cx, cy);
+                    }
+                    ctx.stroke();
+                    
+                    // 节点
+                    ctx.beginPath();
+                    ctx.arc(x - size/2, y, 3, 0, Math.PI * 2);
+                    ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // 发光效果
+                    ctx.globalAlpha *= 0.3;
+                    ctx.lineWidth = 6;
+                    ctx.strokeStyle = shape.color;
+                    ctx.stroke();
+                    break;
+            }
+        }
+        
+        // Main draw function
+        function draw() {
+            // 根据色彩模式调整背景
+            let bgColor = '#0a0a0f';
+            if (params.colorMode === 'gothic') bgColor = '#0a0505';
+            else if (params.colorMode === 'cyberpunk') bgColor = '#0a0012';
+            else if (params.colorMode === 'mucha') bgColor = '#1a1510';
+            
+            // Clear completely for crisp rendering
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            const rotationSpeed = params.rotation / 1000;
+            const breathingAmount = params.breathing / 100;
+            const breathingScale = 1 + Math.sin(time * 0.02) * breathingAmount * 0.2;
+            
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            
+            // Draw each segment
+            for (let seg = 0; seg < params.symmetry; seg++) {
+                ctx.save();
+                ctx.rotate((seg / params.symmetry) * Math.PI * 2 + time * rotationSpeed);
+                
+                // Mirror every other segment
+                if (seg % 2 === 1) {
+                    ctx.scale(-1, 1);
+                }
+                
+                // Draw shapes
+                shapes.forEach(shape => {
+                    const dynamicRadius = shape.radius * breathingScale;
+                    const dynamicAngle = shape.angle + Math.sin(time * 0.01 + shape.phase) * 0.1;
+                    const x = Math.cos(dynamicAngle) * dynamicRadius;
+                    const y = Math.sin(dynamicAngle) * dynamicRadius;
+                    const dynamicSize = shape.size * (0.8 + Math.sin(time * 0.015 + shape.phase) * 0.2);
+                    
+                    ctx.globalAlpha = 0.7 + Math.sin(time * 0.02 + shape.phase) * 0.3;
+                    drawShape(shape, x, y, dynamicSize);
+                });
+                
+                ctx.restore();
+            }
+            
+            ctx.restore();
+            
+            // Draw center circle
+            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 50);
+            gradient.addColorStop(0, 'rgba(255, 255, 255, 0.3)');
+            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 50, 0, Math.PI * 2);
+            ctx.fill();
+            
+            time++;
+            requestAnimationFrame(draw);
+        }
+        
+        // Update handlers
+        function updateParam(id, param) {
+            const input = document.getElementById(id);
+            const display = document.getElementById(id + 'Val');
+            
+            input.addEventListener('input', () => {
+                params[param] = parseFloat(input.value);
+                if (display) display.textContent = input.value;
+                if (param === 'symmetry' || param === 'layers' || param === 'density') {
+                    generateShapes();
+                }
+            });
+        }
+        
+        updateParam('symmetry', 'symmetry');
+        updateParam('layers', 'layers');
+        updateParam('density', 'density');
+        updateParam('rotation', 'rotation');
+        updateParam('breathing', 'breathing');
+        
+        document.getElementById('colorMode').addEventListener('change', (e) => {
+            params.colorMode = e.target.value;
+            generateShapes();
+        });
+        
+        document.getElementById('shape').addEventListener('change', (e) => {
+            params.shape = e.target.value;
+            generateShapes();
+        });
+        
+        // Presets
+        function applyPreset(name) {
+            const presets = {
+                zen: { symmetry: 6, layers: 3, density: 5, rotation: 20, breathing: 40, colorMode: 'monochrome', shape: 'circles' },
+                chaos: { symmetry: 13, layers: 8, density: 15, rotation: 80, breathing: 60, colorMode: 'rainbow', shape: 'mixed' },
+                bloom: { symmetry: 8, layers: 6, density: 8, rotation: 30, breathing: 50, colorMode: 'sunset', shape: 'petals' },
+                crystal: { symmetry: 12, layers: 4, density: 6, rotation: 40, breathing: 20, colorMode: 'cosmic', shape: 'polygons' },
+                topology: { symmetry: 6, layers: 5, density: 6, rotation: 25, breathing: 35, colorMode: 'cosmic', shape: 'topo-mixed' },
+                roman: { symmetry: 6, layers: 3, density: 4, rotation: 15, breathing: 25, colorMode: 'sunset', shape: 'roman' },
+                mucha: { symmetry: 6, layers: 4, density: 5, rotation: 10, breathing: 30, colorMode: 'mucha', shape: 'vine' },
+                gothic: { symmetry: 8, layers: 3, density: 4, rotation: 5, breathing: 15, colorMode: 'gothic', shape: 'arch' },
+                cyber: { symmetry: 8, layers: 6, density: 10, rotation: 60, breathing: 50, colorMode: 'cyberpunk', shape: 'glitch' }
+            };
+            
+            const preset = presets[name];
+            Object.keys(preset).forEach(key => {
+                params[key] = preset[key];
+                const input = document.getElementById(key);
+                if (input) {
+                    input.value = preset[key];
+                    const display = document.getElementById(key + 'Val');
+                    if (display) display.textContent = preset[key];
+                }
+            });
+            generateShapes();
+        }
+        
+        // Randomize
+        function randomize() {
+            params.symmetry = 3 + Math.floor(Math.random() * 21);
+            params.layers = 1 + Math.floor(Math.random() * 9);
+            params.density = 3 + Math.floor(Math.random() * 17);
+            params.rotation = Math.floor(Math.random() * 100);
+            params.breathing = Math.floor(Math.random() * 100);
+            params.colorMode = Object.keys(palettes)[Math.floor(Math.random() * Object.keys(palettes).length)];
+            
+            const allShapes = ['mixed', 'circles', 'polygons', 'petals', 'stars', 'topo-mixed', 'lissajous', 'spiral', 'mobius', 'trefoil', 'torus', 'roman', 'vine', 'arch', 'glitch', 'circuit'];
+            params.shape = allShapes[Math.floor(Math.random() * allShapes.length)];
+            
+            // Update UI
+            Object.keys(params).forEach(key => {
+                const input = document.getElementById(key);
+                if (input) {
+                    input.value = params[key];
+                    const display = document.getElementById(key + 'Val');
+                    if (display) display.textContent = params[key];
+                }
+            });
+            
+            generateShapes();
+        }
+        
+        // Save image
+        function saveImage() {
+            const link = document.createElement('a');
+            link.download = `kaleidoscope-${Date.now()}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Initialize
+        generateShapes();
+        draw();
+    </script>
+</body>
+</html>
