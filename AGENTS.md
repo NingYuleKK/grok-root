@@ -24,6 +24,7 @@ Every change should stay small, testable, and shippable.
 - Prioritize working code and clear docs over abstract architecture.
 - Avoid large refactors unless explicitly requested.
 - Document key decisions in `docs/` and update `MEMORY.md`.
+- At the end of every task, always update `MEMORY.md` (Now/Decisions/TODO) in the same change set.
 
 ## Definition of Done (Per Task)
 - Acceptance criteria are explicitly checked in PR.
@@ -37,4 +38,3 @@ Every change should stay small, testable, and shippable.
 - Branch prefix: `codex/`.
 - PR title format: `[type] short description`
   - `feat`, `fix`, `chore`, `docs`, `refactor`, `test`
-

@@ -15,6 +15,7 @@ Owner: litch
 - Use this file as the single collaboration memory for ongoing context.
 - Keep entries short and operational; update after each weekly delivery.
 - Prioritize "small scope, always runnable" over feature breadth.
+- Maintain an explicit engineering habits playbook in `docs/ENGINEERING_HABITS.md`.
 - Enforce six vibe-coding guardrails:
   - Write 3 acceptance criteria before coding.
   - Make small, reversible changes.
@@ -44,6 +45,7 @@ Owner: litch
 - Workspace root: `/Users/litch/Desktop/litchcodex`
 - Main work folder: `/Users/litch/Desktop/litchcodex/Litchi`
 - This memory file: `/Users/litch/Desktop/litchcodex/Litchi/MEMORY.md`
+- Engineering habits: `/Users/litch/Desktop/litchcodex/Litchi/docs/ENGINEERING_HABITS.md`
 
 ## Glossary
 - vibe coding: keep creative velocity, but inside engineering constraints.
