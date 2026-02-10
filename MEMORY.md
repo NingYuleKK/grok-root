@@ -1,6 +1,6 @@
 # MEMORY
 
-Last Updated: 2026-02-09
+Last Updated: 2026-02-10
 Owner: litch
 
 ## Now
@@ -16,6 +16,13 @@ Owner: litch
 - Keep entries short and operational; update after each weekly delivery.
 - Prioritize "small scope, always runnable" over feature breadth.
 - Maintain an explicit engineering habits playbook in `docs/ENGINEERING_HABITS.md`.
+- Promote workflow hard constraints into `AGENTS.md`:
+  - one requirement = one Issue
+  - one Issue = one branch
+  - PR must include acceptance criteria and test evidence
+- Add weekly documentation review rule in `AGENTS.md` (`MEMORY.md` + `docs/DECISIONS.md`).
+- Replace `AGENTS.md` with Collaboration Contract v1.0 for stable cross-device execution.
+- Add human-side collaboration contract: `docs/engineering-collab-contract.md`.
 - Enforce six vibe-coding guardrails:
   - Write 3 acceptance criteria before coding.
   - Make small, reversible changes.
@@ -46,6 +53,7 @@ Owner: litch
 - Main work folder: `/Users/litch/Desktop/litchcodex/Litchi`
 - This memory file: `/Users/litch/Desktop/litchcodex/Litchi/MEMORY.md`
 - Engineering habits: `/Users/litch/Desktop/litchcodex/Litchi/docs/ENGINEERING_HABITS.md`
+- Human collaboration contract: `/Users/litch/Desktop/litchcodex/Litchi/docs/engineering-collab-contract.md`
 
 ## Glossary
 - vibe coding: keep creative velocity, but inside engineering constraints.

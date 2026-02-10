@@ -1,40 +1,48 @@
-# AGENTS.md
+# Collaboration Contract (Root x Litch x Codex) - v1.0
 
-## Purpose
-This repo is run with a "product brain + vibe coding" style, but engineering quality is mandatory.
-Every change should stay small, testable, and shippable.
+## Mission
+This repo prioritizes: predictable delivery, traceable decisions, and safe iteration.
 
-## Operating Tracks
-- Delivery track: ship one runnable/publishable/demoable output each week.
-- Learning track: focus on one core engineering concept per week.
-- Habit track: always follow the same GitHub workflow:
-  - Issue -> Branch -> PR -> Review -> Release
+## Hard Rules (non-negotiable)
+1. Single source of truth: treat GitHub repo state as truth. Do not rely on chat/session memory.
+2. Start by reading: before any work, read `MEMORY.md` and relevant docs in `/docs`.
+3. One task = one branch: no mixed changes across unrelated issues.
+4. No secrets: never commit `.env` or credentials. Only update `.env.example` when needed.
+5. Close the loop: every task ends with updating `MEMORY.md` (Now/Decisions/TODO) in the same change set.
 
-## Vibe Coding Guardrails
-1. Write 3 acceptance criteria before coding.
-2. Keep scope small; every commit should be reversible.
-3. Add minimal tests for every feature (at least 3 sample cases).
-4. Never commit secrets (`.env`, `.env.example`, `.gitignore` required).
-5. Every PR must include a Codex review pass.
-6. Ship once per week (release or deployment), even if tiny.
+## Workflow (default)
+When user gives a request:
+1. Convert it into an Issue spec:
+   - Goal
+   - Scope (in/out)
+   - 3 acceptance criteria
+   - Risks and rollback note (if applicable)
+2. Propose an execution plan (small steps).
+3. Create branch name suggestion: `codex/<short-slug>`.
+4. Implement in small commits, keep it runnable.
+5. Provide proof:
+   - commands run
+   - outputs or screenshot references
+6. Open PR content using `PULL_REQUEST_TEMPLATE.md`.
+7. Self-review: list risks and edge cases.
+8. After merge, propose Release notes (v0.0.x) and next steps.
 
-## Collaboration Rules For Agents
-- Read `/Users/litch/Desktop/litchcodex/Litchi/MEMORY.md` before making changes.
-- If requirements are unclear, propose a minimal version first and ship it.
-- Prioritize working code and clear docs over abstract architecture.
-- Avoid large refactors unless explicitly requested.
-- Document key decisions in `docs/` and update `MEMORY.md`.
-- At the end of every task, always update `MEMORY.md` (Now/Decisions/TODO) in the same change set.
+## File Map
+- `/Users/litch/Desktop/litchcodex/Litchi/MEMORY.md`: current state (Now/Decisions/TODO).
+- `/Users/litch/Desktop/litchcodex/Litchi/docs/DECISIONS.md`: key decisions and tradeoffs.
+- `/Users/litch/Desktop/litchcodex/Litchi/docs/ENGINEERING_HABITS.md`: operating habits and cadence.
+- `/Users/litch/Desktop/litchcodex/Litchi/docs/engineering-collab-contract.md`: human-side collaboration contract.
+- `/Users/litch/Desktop/litchcodex/Litchi/scripts/`: runnable workflow scripts.
+- `/Users/litch/Desktop/litchcodex/Litchi/.env.example`: environment variable contract.
 
-## Definition of Done (Per Task)
-- Acceptance criteria are explicitly checked in PR.
-- Changes are runnable locally.
-- Minimal tests are added or updated.
-- README/docs are updated when behavior changes.
-- Rollback plan is included for risky changes.
+## Definition of Done
+A task is done only if:
+- Acceptance criteria are met (explicitly checked).
+- Minimal tests or runnable proof is provided.
+- Docs are updated (`README` if setup changed; `MEMORY.md` always).
+- No unsafe changes (secrets, uncontrolled refactors).
 
-## Branch & PR Convention
-- One issue per branch.
-- Branch prefix: `codex/`.
-- PR title format: `[type] short description`
-  - `feat`, `fix`, `chore`, `docs`, `refactor`, `test`
+## Communication Style
+- Plan first, then execute.
+- If uncertain, ask or inspect the repo. Do not guess.
+- Prefer concise checklists and explicit file diffs.
