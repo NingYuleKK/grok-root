@@ -5,12 +5,15 @@ This repository is the execution base for an 8-week "engineering + vibe coding" 
 ## Quick Start
 1. Copy environment template:
    - `cp .env.example .env`
-2. Install local trace command shim:
+2. Ensure local runtime:
+   - `python3` for repository scripts
+   - `node` + `npm` for Astro blog workflow
+3. Install local trace command shim:
    - `./scripts/build.sh`
-3. Run the command:
+4. Run the command:
    - `.local/bin/trace hello`
    - `.local/bin/trace hello --format json`
-4. Run checks:
+5. Run checks:
    - `./scripts/all.sh`
 
 ## Project Conventions
@@ -19,6 +22,13 @@ This repository is the execution base for an 8-week "engineering + vibe coding" 
 - Rules and collaboration contract: `AGENTS.md`
 - Ongoing context and plan status: `MEMORY.md`
 
+## Why This Workflow Exists
+- Issue: force clarity before implementation (goal/scope/acceptance).
+- Branch: isolate one task, reduce accidental side effects.
+- PR: create reviewable proof (what changed + how validated).
+- Review: catch risks before merge.
+- Release: turn "done in code" into "available to use."
+
 ## Week 1 Deliverable: Hello Repo CLI
 - Command: `trace hello`
 - Purpose: print minimal project status for a runnable demo.
@@ -26,6 +36,21 @@ This repository is the execution base for an 8-week "engineering + vibe coding" 
   - `project`
   - `message`
   - `timestamp`
+
+## Week 2 Deliverable: English Blog (Astro Migration in Progress)
+- Blog root: `03_Products/english-blog/`
+- Astro routes:
+  - Home: `src/pages/index.astro`
+  - Post detail: `src/pages/posts/[...slug].astro`
+  - Tags index: `src/pages/tags/index.astro`
+  - Tag detail: `src/pages/tags/[tag].astro`
+- Blog content collection:
+  - Config: `src/content/config.ts`
+  - First migrated post: `src/content/blog/week-2-workflow-beats-motivation.md`
+- Rollback safety:
+  - Legacy static MVP preserved in `03_Products/english-blog/legacy-static/`
+- UI baseline conventions:
+  - `docs/blog-ui-guidelines-v1.md`
 
 ## Scripts
 - `./scripts/lint.sh`
@@ -50,3 +75,26 @@ This repository is the execution base for an 8-week "engineering + vibe coding" 
 - Optional `trace` command style:
   - `PATH="$(pwd)/.local/bin:$PATH" trace hello`
 - Run tests: `./scripts/test.sh`
+
+## Blog Commands
+- Validate blog MVP artifacts: `./scripts/blog-check.sh`
+- Astro local development:
+  - `cd 03_Products/english-blog`
+  - `npm install`
+  - `npm run dev`
+- Astro production build:
+  - `npm run build`
+  - `npm run preview`
+
+## Deploy Blog (GitHub Pages + Custom Domain)
+1. Set Astro deploy variables before build (ops-managed):
+   - `PUBLIC_SITE_URL` (for example: `https://blog.yourdomain.com`)
+   - `PUBLIC_BASE_PATH` (normally `/` for custom domain, or repo subpath for project pages)
+2. Push repository to GitHub main branch.
+3. Build static output from `03_Products/english-blog` (`npm run build`), output directory is `dist/`.
+4. In repository settings, enable GitHub Pages with the chosen publish strategy (manual artifact or CI workflow in later issue).
+5. Add your domain in GitHub Pages custom domain field.
+6. In your DNS provider, create records:
+   - `CNAME` for `www` to `<your-github-username>.github.io`
+   - `A`/`ALIAS` for apex domain as required by your provider
+7. Verify domain status in GitHub Pages and test both desktop/mobile.

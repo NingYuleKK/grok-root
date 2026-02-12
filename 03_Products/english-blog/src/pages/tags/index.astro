@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = await getCollection("blog");
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) =>
+  a.localeCompare(b)
+);
+---
+
+<BaseLayout title="Tags | Litchi Notes" description="All tags from Litchi Notes posts.">
+  <section class="section-block">
+    <h1>Tags</h1>
+    <p class="lede">Browse posts by topic.</p>
+    <ul class="tag-grid">
+      {
+        tags.map((tag) => (
+          <li>
+            <a class="tag" href={`/tags/${encodeURIComponent(tag)}/`}>
+              #{tag}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

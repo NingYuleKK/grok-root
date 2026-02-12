@@ -27,6 +27,14 @@ When user gives a request:
 7. Self-review: list risks and edge cases.
 8. After merge, propose Release notes (v0.0.x) and next steps.
 
+## Startup Checklist (required at task start)
+At the start of each new task/window, print a 5-line kickoff confirmation:
+1. I have read `MEMORY.md` (current Now is: ...).
+2. Current task goal is: ...
+3. Acceptance criteria are: ...
+4. Suggested branch name is: `codex/<short-slug>`.
+5. Task close-out will update: `MEMORY.md` / `docs/DECISIONS.md` / `README.md` (as needed).
+
 ## File Map
 - `/Users/litch/Desktop/litchcodex/Litchi/MEMORY.md`: current state (Now/Decisions/TODO).
 - `/Users/litch/Desktop/litchcodex/Litchi/docs/DECISIONS.md`: key decisions and tradeoffs.

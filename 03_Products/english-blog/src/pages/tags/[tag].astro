@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  return tags.map((tag) => ({ params: { tag: encodeURIComponent(tag) } }));
+}
+
+const selectedTag = decodeURIComponent(Astro.params.tag || "");
+const posts = (await getCollection("blog"))
+  .filter((post) => post.data.tags.includes(selectedTag))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title={`#${selectedTag} | Litchi Notes`} description={`Posts tagged ${selectedTag}`}>
+  <section class="section-block">
+    <h1>#{selectedTag}</h1>
+    <p class="lede">
+      <a href="/tags">← All tags</a>
+    </p>
+    <ul class="post-list">
+      {
+        posts.map((post) => (
+          <li class="post-item">
+            <p class="meta">{post.data.pubDate.toISOString().slice(0, 10)}</p>
+            <h2>
+              <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+            </h2>
+            <p>{post.data.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

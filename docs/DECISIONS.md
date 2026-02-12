@@ -9,3 +9,15 @@
 - For Week 1 mini CLI, implement a Python command `trace hello` with text/json output.
 - Use local command shim installation (`.local/bin/trace`) instead of pip package install, to stay reliable in restricted/sandboxed environments.
 - Keep tests on Python stdlib `unittest` (3 core cases) to avoid extra dependency setup.
+
+## 2026-02-12
+- For Week 2 blog MVP, use a static site in `03_Products/english-blog/` to keep deployment simple and predictable.
+- Include one migrated English article and a client-side subscribe form with validation as the minimum publishable content set.
+- Add `scripts/blog-check.sh` and integrate it into `scripts/test.sh` so blog structure checks run in the default CI-like flow.
+- Issue A migration decision: move blog to Astro with content collections (`blog`) and file-based routes for tags index/detail.
+- Keep rollback path by preserving pre-Astro static MVP under `03_Products/english-blog/legacy-static/`.
+- Configure deploy placeholders in Astro (`PUBLIC_SITE_URL`, `PUBLIC_BASE_PATH`) so ops can set site/base without code changes.
+- Accept Issue A after runtime proof on node-enabled machine (`npm install`, `npm run dev`, `npm run build`, `npm run preview`).
+- Issue B UI baseline decision: standardize typography, spacing scale, card/tag components, and nav active states across home/post/tags pages.
+- Record visual conventions in `docs/blog-ui-guidelines-v1.md` to avoid style drift in future issues.
+- Accept Issue B after runtime proof (`npm run dev`, `npm run build`) with confirmed tags-route non-regression.

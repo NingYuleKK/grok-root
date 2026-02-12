@@ -1,0 +1,47 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+import "../styles/global.css";
+
+const { title, description = "Litchi Notes blog" } = Astro.props;
+const currentPath = Astro.url.pathname;
+const canonicalUrl = Astro.url.href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <link rel="canonical" href={canonicalUrl} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/">Litchi Notes</a>
+        <nav aria-label="Primary">
+          <a href="/" aria-current={currentPath === "/" ? "page" : undefined}>Home</a>
+          <a href="/tags" aria-current={currentPath.startsWith("/tags") ? "page" : undefined}>
+            Tags
+          </a>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content" class="container page-shell">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">© 2026 Litchi Notes</div>
+    </footer>
+  </body>
+</html>
