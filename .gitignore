@@ -30,3 +30,5 @@ coverage/
 .idea/
 .vscode/
 
+# Local tooling artifacts
+.local/

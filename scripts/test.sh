@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "[test] placeholder: add project test command here"
-
+echo "[test] running unit tests"
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m unittest discover -s tests -p 'test_*.py' -v
+echo "[test] done"

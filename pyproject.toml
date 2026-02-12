@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "litchi-trace-cli"
+version = "0.0.1"
+description = "Week 1 mini CLI for Hello Repo delivery"
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.scripts]
+trace = "trace_cli.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -5,7 +5,7 @@ Owner: litch
 
 ## Now
 - Goal: build engineering habits with an 8-week "vibe coding + shipping" plan.
-- Current phase: Day 0 completed; ready for Week 1 delivery.
+- Current phase: Week 1 delivered (`trace hello` mini CLI shipped with tests).
 - Weekly operating model:
   - Delivery track: one runnable/publishable/demoable output each week.
   - Learning track: one core engineering concept each week.
@@ -23,6 +23,11 @@ Owner: litch
 - Add weekly documentation review rule in `AGENTS.md` (`MEMORY.md` + `docs/DECISIONS.md`).
 - Replace `AGENTS.md` with Collaboration Contract v1.0 for stable cross-device execution.
 - Add human-side collaboration contract: `docs/engineering-collab-contract.md`.
+- Add reusable prompt templates under `prompts/` (`start-task`, `end-task`, `weekly-review`).
+- Week 1 CLI implementation note:
+  - command: `trace hello` (text/json)
+  - install method: local shim at `.local/bin/trace`
+  - tests: stdlib `unittest` with 3 passing cases
 - Enforce six vibe-coding guardrails:
   - Write 3 acceptance criteria before coding.
   - Make small, reversible changes.
@@ -39,7 +44,7 @@ Owner: litch
 - [x] Day 0: define GitHub ritual templates:
   - [x] Issue template with 3 acceptance criteria.
   - [x] PR template with test + release checklist.
-- [ ] Week 1: ship mini CLI (install/run/test complete).
+- [x] Week 1: ship mini CLI (install/run/test complete).
 - [ ] Week 2: ship English blog MVP + 1 migrated post + email subscribe component.
 - [ ] Week 3: ship conversation importer (jsonl/sqlite) + sample tests.
 - [ ] Week 4: ship keyword search + date/tag/source filters.
@@ -54,6 +59,8 @@ Owner: litch
 - This memory file: `/Users/litch/Desktop/litchcodex/Litchi/MEMORY.md`
 - Engineering habits: `/Users/litch/Desktop/litchcodex/Litchi/docs/ENGINEERING_HABITS.md`
 - Human collaboration contract: `/Users/litch/Desktop/litchcodex/Litchi/docs/engineering-collab-contract.md`
+- Prompt templates: `/Users/litch/Desktop/litchcodex/Litchi/prompts/`
+- Week 1 issue spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week1-hello-repo-issue.md`
 
 ## Glossary
 - vibe coding: keep creative velocity, but inside engineering constraints.
