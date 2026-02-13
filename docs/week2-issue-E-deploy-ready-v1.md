@@ -1,5 +1,7 @@
 # [feat] Issue E - Deploy-ready v1 (GitHub Pages + Custom Domain Notes)
 
+Status: DONE + accepted
+
 ## Goal
 - Make the blog deployment operationally clear so ops can launch and maintain it reliably.
 
@@ -13,9 +15,9 @@
   - Provider-specific infra automation beyond current ops requirements
 
 ## Acceptance Criteria
-- [ ] `npm run build` and `npm run preview` work with documented steps.
-- [ ] Deployment docs cover `site/base`, output dir, and domain handoff points.
-- [ ] If Actions are used, workflow file is present and documented for ops enablement.
+- [x] `npm run build` and `npm run preview` work with documented steps.
+- [x] Deployment docs cover `site/base`, output dir, and domain handoff points.
+- [x] If Actions are used, workflow file is present and documented for ops enablement.
 
 ## Constraints
 - Tech/runtime constraints:
@@ -28,4 +30,6 @@
   - `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-D-comments-giscus.md`
 - Additional context:
   - Define release cadence after main merges (tag format + changelog minimum).
-
+  - Implementation docs/workflow for Issue E:
+    - `/Users/litch/Desktop/litchcodex/Litchi/docs/deploy-blog-pages-v1.md`
+    - `/Users/litch/Desktop/litchcodex/Litchi/.github/workflows/blog-pages.yml`

@@ -29,3 +29,9 @@
 - Keep fallback behavior explicit: when giscus config is missing, show a clear "not configured" message instead of failing silently.
 - Accept Issue D after runtime proof: comments render/post/persist, notification path verified, and build success.
 - Add `docs/PROJECT_MAP.md` as onboarding/cognitive map for cross-device and cross-agent continuation.
+
+## 2026-02-13
+- Issue E deploy decision: provide an ops-first runbook (`docs/deploy-blog-pages-v1.md`) that fixes the deploy contract around `PUBLIC_SITE_URL`, `PUBLIC_BASE_PATH`, and `dist/` output.
+- Add optional GitHub Pages workflow (`.github/workflows/blog-pages.yml`) for push-to-main and manual dispatch deployment.
+- Keep deploy config secret-free in repo; pass site/base values through GitHub repository variables.
+- Accept Issue E after runtime proof on node-enabled machine (`npm install`, `npm run build`, `npm run preview`) plus route-level spot checks (home/post/newsletter/tags).

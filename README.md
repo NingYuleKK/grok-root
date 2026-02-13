@@ -123,14 +123,23 @@ This repository is the execution base for an 8-week "engineering + vibe coding" 
    - No secrets are required; keep values in deploy/runtime env.
 
 ## Deploy Blog (GitHub Pages + Custom Domain)
-1. Set Astro deploy variables before build (ops-managed):
-   - `PUBLIC_SITE_URL` (for example: `https://blog.yourdomain.com`)
-   - `PUBLIC_BASE_PATH` (normally `/` for custom domain, or repo subpath for project pages)
-2. Push repository to GitHub main branch.
-3. Build static output from `03_Products/english-blog` (`npm run build`), output directory is `dist/`.
-4. In repository settings, enable GitHub Pages with the chosen publish strategy (manual artifact or CI workflow in later issue).
-5. Add your domain in GitHub Pages custom domain field.
-6. In your DNS provider, create records:
-   - `CNAME` for `www` to `<your-github-username>.github.io`
-   - `A`/`ALIAS` for apex domain as required by your provider
-7. Verify domain status in GitHub Pages and test both desktop/mobile.
+1. Configure deployment env values (do not commit secrets):
+   - `PUBLIC_SITE_URL`
+   - `PUBLIC_BASE_PATH`
+2. `PUBLIC_BASE_PATH` rule:
+   - custom domain/user pages (`https://blog.example.com`): `/`
+   - project pages (`https://<user>.github.io/<repo>/`): `/<repo>/`
+3. Build and local preview from `03_Products/english-blog`:
+   - `npm run build` (output directory: `dist/`)
+   - `npm run preview`
+4. Optional CI deploy workflow:
+   - file: `.github/workflows/blog-pages.yml`
+   - set repository variables in GitHub:
+     - `PUBLIC_SITE_URL`
+     - `PUBLIC_BASE_PATH`
+5. Custom domain handoff:
+   - set domain in GitHub Pages settings
+   - create DNS records (`CNAME` for `www`; `A/ALIAS` for apex as provider requires)
+   - wait for cert issuance and verify HTTPS
+6. Full runbook:
+   - `docs/deploy-blog-pages-v1.md`

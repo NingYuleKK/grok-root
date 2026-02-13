@@ -33,7 +33,9 @@ Purpose: Fast onboarding map for any agent/human to continue work without thread
   - C acceptance: `docs/week2-issue-C-acceptance-report.md`
   - D spec: `docs/week2-issue-D-comments-giscus.md` (DONE)
   - D acceptance: `docs/week2-issue-D-acceptance-report.md`
-  - E spec: `docs/week2-issue-E-deploy-ready-v1.md` (NEXT)
+  - E spec: `docs/week2-issue-E-deploy-ready-v1.md` (DONE)
+  - E acceptance: `docs/week2-issue-E-acceptance-report.md`
+  - E runbook: `docs/deploy-blog-pages-v1.md`
 
 ## 4) Validation Commands
 - Repo checks:
@@ -57,4 +59,3 @@ At task end, always update:
 2. `docs/DECISIONS.md` (if technical direction changed)
 3. `README.md` (if run/setup/deploy behavior changed)
 4. corresponding issue spec/acceptance docs
-

@@ -5,7 +5,7 @@ Owner: litch
 
 ## Now
 - Goal: build engineering habits with an 8-week "vibe coding + shipping" plan.
-- Current phase: Issue D accepted (comments + notification path validated), ready for Issue E deploy-ready.
+- Current phase: Week 2 Issue E accepted; ready to start Week 3 conversation importer.
 - Weekly operating model:
   - Delivery track: one runnable/publishable/demoable output each week.
   - Learning track: one core engineering concept each week.
@@ -64,6 +64,12 @@ Owner: litch
   - runtime acceptance passed (comments render/post/persist + notification path + build success)
   - acceptance evidence file: `docs/week2-issue-D-acceptance-report.md`
   - add repo/docs cognitive map: `docs/PROJECT_MAP.md`
+- Issue E implementation note:
+  - add deploy runbook: `docs/deploy-blog-pages-v1.md`
+  - add optional Pages workflow: `.github/workflows/blog-pages.yml`
+  - upgrade root deploy docs in `README.md` (site/base, dist output, domain handoff)
+  - acceptance evidence file: `docs/week2-issue-E-acceptance-report.md`
+  - runtime verification passed on node-enabled machine (`npm install`, `npm run build`, `npm run preview`)
 - Add AGENTS startup checklist rule: each new task/window must print 5-line kickoff confirmation (memory read, goal, acceptance criteria, branch, close-out docs).
 - Enforce six vibe-coding guardrails:
   - Write 3 acceptance criteria before coding.
@@ -91,7 +97,7 @@ Owner: litch
 - [x] Issue C verification: run node-enabled `npm run dev`/`npm run build` and validate subscribe flow feedback.
 - [x] Issue D: comments v1 via GitHub Discussions (giscus).
 - [x] Issue D verification: run node-enabled `npm run dev`/`npm run build` and confirm comments load after config.
-- [ ] Issue E: deploy-ready v1 (GitHub Pages + custom domain notes).
+- [x] Issue E: deploy-ready v1 (GitHub Pages + custom domain notes) with runtime verification.
 - [ ] Week 3: ship conversation importer (jsonl/sqlite) + sample tests.
 - [ ] Week 4: ship keyword search + date/tag/source filters.
 - [ ] Week 5: ship summarizer with 5-level importance + auto MEMORY update.
@@ -120,6 +126,8 @@ Owner: litch
 - Week 2 issue D spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-D-comments-giscus.md`
 - Week 2 issue D acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-D-acceptance-report.md`
 - Week 2 issue E spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-E-deploy-ready-v1.md`
+- Week 2 issue E acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-E-acceptance-report.md`
+- Deploy runbook: `/Users/litch/Desktop/litchcodex/Litchi/docs/deploy-blog-pages-v1.md`
 
 ## Glossary
 - vibe coding: keep creative velocity, but inside engineering constraints.

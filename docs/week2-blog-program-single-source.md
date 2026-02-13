@@ -17,7 +17,7 @@ Upgrade the English blog MVP into a long-term Astro-based writing system with:
 - Issue B: DONE + accepted
 - Issue C: DONE + accepted
 - Issue D: DONE + accepted
-- Issue E: TODO
+- Issue E: DONE + accepted
 
 ## Issue A - Migrate to Astro + Native Tags
 Status: DONE
@@ -83,8 +83,9 @@ Acceptance Criteria:
 - Build passes with clear setup docs
 
 ## Issue E - Deploy-ready v1
-Status: TODO
+Status: DONE + accepted
 Spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-E-deploy-ready-v1.md`
+Acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-E-acceptance-report.md`
 
 Goal:
 - Produce ops-ready deployment path for GitHub Pages + custom domain.
@@ -93,6 +94,12 @@ Acceptance Criteria:
 - `npm run build` and `npm run preview` pass with documented steps
 - Docs cover `site/base`, output dir, and domain handoff
 - Optional Pages workflow documented if enabled
+
+Delivered (current):
+- deployment runbook: `docs/deploy-blog-pages-v1.md`
+- optional pages workflow: `.github/workflows/blog-pages.yml`
+- root README deploy section upgraded for ops handoff
+- runtime verification completed on node-enabled environment (`npm install`, `npm run build`, `npm run preview`)
 
 ## Handoff Protocol (Cross-Device / Cross-Agent)
 At task start:
