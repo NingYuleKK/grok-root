@@ -36,6 +36,7 @@ Owner: litch
 - Week 2 upgrade planning note:
   - define 5 sequential issues for Astro upgrade path (A: migration/tags, B: UI, C: newsletter, D: comments, E: deploy-ready)
   - execution rule remains one issue per branch/PR with runnable evidence
+  - establish one consolidated source document for A-E requirements/progress: `docs/week2-blog-program-single-source.md`
 - Issue A implementation note:
   - Astro scaffold added in `03_Products/english-blog/` with content collections and tags routes
   - first post migrated to Markdown (`src/content/blog/week-2-workflow-beats-motivation.md`)
@@ -88,6 +89,7 @@ Owner: litch
 - Prompt templates: `/Users/litch/Desktop/litchcodex/Litchi/prompts/`
 - Week 1 issue spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week1-hello-repo-issue.md`
 - Week 2 issue spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-english-blog-issue.md`
+- Week 2 program SSoT: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-blog-program-single-source.md`
 - Week 2 issue A spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-A-astro-migration-tags.md`
 - Week 2 issue A acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-A-acceptance-report.md`
 - Week 2 issue B spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-B-ui-refresh-v1.md`

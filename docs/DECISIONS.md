@@ -21,3 +21,4 @@
 - Issue B UI baseline decision: standardize typography, spacing scale, card/tag components, and nav active states across home/post/tags pages.
 - Record visual conventions in `docs/blog-ui-guidelines-v1.md` to avoid style drift in future issues.
 - Accept Issue B after runtime proof (`npm run dev`, `npm run build`) with confirmed tags-route non-regression.
+- Consolidate Week 2 A-E requirements/progress into one source doc: `docs/week2-blog-program-single-source.md`.
