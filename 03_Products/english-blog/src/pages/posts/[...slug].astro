@@ -17,7 +17,7 @@ const { Content } = await render(post);
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title={`${post.data.title} | Litchi Notes`} description={post.data.description}>
+<BaseLayout title={`${post.data.title} | Litch's Grok Log`} description={post.data.description}>
   <article class="post section-block">
     <p class="meta">{post.data.pubDate.toISOString().slice(0, 10)}</p>
     <h1>{post.data.title}</h1>
