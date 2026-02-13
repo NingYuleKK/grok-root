@@ -6,6 +6,7 @@ const posts = await getCollection("blog");
 const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) =>
   a.localeCompare(b)
 );
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Tags | Litchi Notes" description="All tags from Litchi Notes posts.">
@@ -16,7 +17,7 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) =
       {
         tags.map((tag) => (
           <li>
-            <a class="tag" href={`/tags/${encodeURIComponent(tag)}/`}>
+            <a class="tag" href={`${base}/tags/${encodeURIComponent(tag)}/`}>
               #{tag}
             </a>
           </li>
