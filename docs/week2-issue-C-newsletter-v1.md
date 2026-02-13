@@ -13,9 +13,9 @@
   - Full subscriber CRM workflow
 
 ## Acceptance Criteria
-- [ ] Subscribe form appears and returns clear success/failure/redirect feedback.
-- [ ] Provider parameters are centralized (no scattered embed code).
-- [ ] No secrets committed; env/config placeholders documented (`.env.example` or config constants).
+- [x] Subscribe form appears and returns clear success/failure/redirect feedback.
+- [x] Provider parameters are centralized (no scattered embed code).
+- [x] No secrets committed; env/config placeholders documented (`.env.example` or config constants).
 
 ## Constraints
 - Tech/runtime constraints:
@@ -28,4 +28,3 @@
   - `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-B-ui-refresh-v1.md`
 - Additional context:
   - README must include provider swap steps and configuration contract.
-

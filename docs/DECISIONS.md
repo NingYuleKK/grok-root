@@ -22,3 +22,10 @@
 - Record visual conventions in `docs/blog-ui-guidelines-v1.md` to avoid style drift in future issues.
 - Accept Issue B after runtime proof (`npm run dev`, `npm run build`) with confirmed tags-route non-regression.
 - Consolidate Week 2 A-E requirements/progress into one source doc: `docs/week2-blog-program-single-source.md`.
+- Issue C newsletter decision: implement provider-agnostic subscribe component with centralized config (`src/config/newsletter.ts`) and env-driven placeholders.
+- Use redirect/placeholder modes to provide explicit user feedback without committing provider secrets.
+- Accept Issue C after runtime proof (home/post form presence, invalid-email feedback, redirect mode success, build success).
+- Issue D comments decision: use giscus (GitHub Discussions) with centralized config in `src/config/comments.ts` and env-driven setup.
+- Keep fallback behavior explicit: when giscus config is missing, show a clear "not configured" message instead of failing silently.
+- Accept Issue D after runtime proof: comments render/post/persist, notification path verified, and build success.
+- Add `docs/PROJECT_MAP.md` as onboarding/cognitive map for cross-device and cross-agent continuation.

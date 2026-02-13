@@ -51,6 +51,9 @@ This repository is the execution base for an 8-week "engineering + vibe coding" 
   - Legacy static MVP preserved in `03_Products/english-blog/legacy-static/`
 - UI baseline conventions:
   - `docs/blog-ui-guidelines-v1.md`
+- Newsletter integration (Issue C):
+  - Component: `src/components/NewsletterForm.astro`
+  - Config: `src/config/newsletter.ts`
 
 ## Scripts
 - `./scripts/lint.sh`
@@ -85,6 +88,39 @@ This repository is the execution base for an 8-week "engineering + vibe coding" 
 - Astro production build:
   - `npm run build`
   - `npm run preview`
+
+## Newsletter Setup (Issue C)
+1. Configure placeholders in `.env` (do not commit secrets):
+   - `PUBLIC_NEWSLETTER_PROVIDER`
+   - `PUBLIC_NEWSLETTER_MODE`
+   - `PUBLIC_NEWSLETTER_ACTION_URL`
+   - `PUBLIC_NEWSLETTER_SOURCE`
+2. For production provider redirect mode:
+   - set `PUBLIC_NEWSLETTER_MODE=redirect`
+   - set `PUBLIC_NEWSLETTER_ACTION_URL=<provider_form_endpoint>`
+3. For local/dev placeholder mode:
+   - keep `PUBLIC_NEWSLETTER_MODE=placeholder`
+   - component shows explicit "not configured" feedback
+4. Provider replacement rule:
+   - update only `src/config/newsletter.ts` and env placeholders, not page files.
+
+## Comments Setup (Issue D: giscus)
+1. Prerequisites (GitHub):
+   - Enable GitHub Discussions for your repository.
+   - Create/select a Discussions category for blog comments.
+2. Configure giscus values in `.env`:
+   - `PUBLIC_GISCUS_REPO` (e.g. `owner/repo`)
+   - `PUBLIC_GISCUS_REPO_ID`
+   - `PUBLIC_GISCUS_CATEGORY`
+   - `PUBLIC_GISCUS_CATEGORY_ID`
+   - Optional mapping/theme/lang options from `.env.example`
+3. Comments mounting:
+   - component: `src/components/GiscusComments.astro`
+   - config: `src/config/comments.ts`
+   - mounted on post pages: `src/pages/posts/[...slug].astro`
+4. Behavior notes:
+   - If config is incomplete, page shows a clear "not configured" notice.
+   - No secrets are required; keep values in deploy/runtime env.
 
 ## Deploy Blog (GitHub Pages + Custom Domain)
 1. Set Astro deploy variables before build (ops-managed):

@@ -1,11 +1,11 @@
 # MEMORY
 
-Last Updated: 2026-02-12
+Last Updated: 2026-02-13
 Owner: litch
 
 ## Now
 - Goal: build engineering habits with an 8-week "vibe coding + shipping" plan.
-- Current phase: Issue B accepted (UI refresh v1 complete), ready for Issue C newsletter integration.
+- Current phase: Issue D accepted (comments + notification path validated), ready for Issue E deploy-ready.
 - Weekly operating model:
   - Delivery track: one runnable/publishable/demoable output each week.
   - Learning track: one core engineering concept each week.
@@ -49,6 +49,21 @@ Owner: litch
   - UI conventions documented in `docs/blog-ui-guidelines-v1.md`
   - runtime verification passed on node-enabled machine (`npm run dev`, `npm run build`)
   - acceptance evidence file: `docs/week2-issue-B-acceptance-report.md`
+- Issue C implementation note:
+  - add reusable `NewsletterForm` component on homepage and post page
+  - centralize provider settings in `src/config/newsletter.ts`
+  - add env placeholders for newsletter provider/mode/action/source in `.env.example`
+  - add explicit success/error/redirect feedback behavior for subscription action
+  - runtime acceptance passed (home/post form, invalid email feedback, redirect mode, build success)
+  - acceptance evidence file: `docs/week2-issue-C-acceptance-report.md`
+- Issue D implementation note:
+  - add `GiscusComments` component and mount on post pages
+  - centralize giscus config in `src/config/comments.ts`
+  - add giscus placeholders to `.env.example`
+  - add README setup instructions for Discussions + giscus
+  - runtime acceptance passed (comments render/post/persist + notification path + build success)
+  - acceptance evidence file: `docs/week2-issue-D-acceptance-report.md`
+  - add repo/docs cognitive map: `docs/PROJECT_MAP.md`
 - Add AGENTS startup checklist rule: each new task/window must print 5-line kickoff confirmation (memory read, goal, acceptance criteria, branch, close-out docs).
 - Enforce six vibe-coding guardrails:
   - Write 3 acceptance criteria before coding.
@@ -72,7 +87,11 @@ Owner: litch
 - [x] Issue A verification: run Astro `dev/build/preview` commands on node-enabled machine and attach evidence.
 - [x] Issue B: UI refresh v1 (layout + typography + responsive).
 - [x] Issue B verification: run Astro build on node-enabled machine and confirm no route regression.
-- [ ] Issue C: newsletter subscription v1 (embed/plug-in).
+- [x] Issue C: newsletter subscription v1 (embed/plug-in).
+- [x] Issue C verification: run node-enabled `npm run dev`/`npm run build` and validate subscribe flow feedback.
+- [x] Issue D: comments v1 via GitHub Discussions (giscus).
+- [x] Issue D verification: run node-enabled `npm run dev`/`npm run build` and confirm comments load after config.
+- [ ] Issue E: deploy-ready v1 (GitHub Pages + custom domain notes).
 - [ ] Week 3: ship conversation importer (jsonl/sqlite) + sample tests.
 - [ ] Week 4: ship keyword search + date/tag/source filters.
 - [ ] Week 5: ship summarizer with 5-level importance + auto MEMORY update.
@@ -90,13 +109,16 @@ Owner: litch
 - Week 1 issue spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week1-hello-repo-issue.md`
 - Week 2 issue spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-english-blog-issue.md`
 - Week 2 program SSoT: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-blog-program-single-source.md`
+- Project map: `/Users/litch/Desktop/litchcodex/Litchi/docs/PROJECT_MAP.md`
 - Week 2 issue A spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-A-astro-migration-tags.md`
 - Week 2 issue A acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-A-acceptance-report.md`
 - Week 2 issue B spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-B-ui-refresh-v1.md`
 - Week 2 issue B acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-B-acceptance-report.md`
 - Blog UI guidelines: `/Users/litch/Desktop/litchcodex/Litchi/docs/blog-ui-guidelines-v1.md`
 - Week 2 issue C spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-C-newsletter-v1.md`
+- Week 2 issue C acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-C-acceptance-report.md`
 - Week 2 issue D spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-D-comments-giscus.md`
+- Week 2 issue D acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-D-acceptance-report.md`
 - Week 2 issue E spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-E-deploy-ready-v1.md`
 
 ## Glossary

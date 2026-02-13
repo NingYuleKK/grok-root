@@ -14,9 +14,9 @@
   - Multi-provider comments abstraction
 
 ## Acceptance Criteria
-- [ ] Post pages render comments container and load discussions after config is set.
-- [ ] giscus config is centralized; no sensitive data is committed.
-- [ ] Build passes; docs include full setup steps and caveats.
+- [x] Post pages render comments container and load discussions after config is set.
+- [x] giscus config is centralized; no sensitive data is committed.
+- [x] Build passes; docs include full setup steps and caveats.
 
 ## Constraints
 - Tech/runtime constraints:
@@ -29,4 +29,3 @@
   - `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-C-newsletter-v1.md`
 - Additional context:
   - Record rationale and alternatives (utterances/disqus) in MEMORY/DECISIONS.
-

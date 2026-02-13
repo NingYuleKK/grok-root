@@ -15,8 +15,8 @@ Upgrade the English blog MVP into a long-term Astro-based writing system with:
 ## Current Status
 - Issue A: DONE + accepted
 - Issue B: DONE + accepted
-- Issue C: TODO
-- Issue D: TODO
+- Issue C: DONE + accepted
+- Issue D: DONE + accepted
 - Issue E: TODO
 
 ## Issue A - Migrate to Astro + Native Tags
@@ -57,8 +57,9 @@ Delivered:
 - documented UI conventions
 
 ## Issue C - Newsletter Subscription v1
-Status: TODO
+Status: DONE
 Spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-C-newsletter-v1.md`
+Acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-C-acceptance-report.md`
 
 Goal:
 - Add replaceable newsletter subscribe integration (embed/plug-in first).
@@ -69,8 +70,9 @@ Acceptance Criteria:
 - No secrets committed; placeholders documented
 
 ## Issue D - Comments v1 via giscus
-Status: TODO
+Status: DONE
 Spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-D-comments-giscus.md`
+Acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-D-acceptance-report.md`
 
 Goal:
 - Add post-level reader interaction using GitHub Discussions (giscus).
@@ -96,12 +98,12 @@ Acceptance Criteria:
 At task start:
 1. Read `AGENTS.md`
 2. Read `MEMORY.md`
-3. Read this file
-4. Open active issue spec
+3. Read `docs/PROJECT_MAP.md`
+4. Read this file
+5. Open active issue spec
 
 At task end:
 1. Update issue status/evidence docs
 2. Update `MEMORY.md` (Now/Decisions/TODO)
 3. Update `docs/DECISIONS.md` and `README.md` if behavior/process changed
 4. Commit + push
-
