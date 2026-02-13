@@ -25,7 +25,7 @@ const posts = (await getCollection("blog")).sort(
           <li class="post-item">
             <p class="meta">{post.data.pubDate.toISOString().slice(0, 10)}</p>
             <h3>
-              <a href={`/posts/${post.id}/`}>{post.data.title}</a>
+              <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
             </h3>
             <p>{post.data.description}</p>
             <p class="tags">
