@@ -51,6 +51,9 @@ This repository is the execution base for an 8-week "engineering + vibe coding" 
   - Legacy static MVP preserved in `03_Products/english-blog/legacy-static/`
 - UI baseline conventions:
   - `docs/blog-ui-guidelines-v1.md`
+- Newsletter integration (Issue C):
+  - Component: `src/components/NewsletterForm.astro`
+  - Config: `src/config/newsletter.ts`
 
 ## Scripts
 - `./scripts/lint.sh`
@@ -86,15 +89,57 @@ This repository is the execution base for an 8-week "engineering + vibe coding" 
   - `npm run build`
   - `npm run preview`
 
+## Newsletter Setup (Issue C)
+1. Configure placeholders in `.env` (do not commit secrets):
+   - `PUBLIC_NEWSLETTER_PROVIDER`
+   - `PUBLIC_NEWSLETTER_MODE`
+   - `PUBLIC_NEWSLETTER_ACTION_URL`
+   - `PUBLIC_NEWSLETTER_SOURCE`
+2. For production provider redirect mode:
+   - set `PUBLIC_NEWSLETTER_MODE=redirect`
+   - set `PUBLIC_NEWSLETTER_ACTION_URL=<provider_form_endpoint>`
+3. For local/dev placeholder mode:
+   - keep `PUBLIC_NEWSLETTER_MODE=placeholder`
+   - component shows explicit "not configured" feedback
+4. Provider replacement rule:
+   - update only `src/config/newsletter.ts` and env placeholders, not page files.
+
+## Comments Setup (Issue D: giscus)
+1. Prerequisites (GitHub):
+   - Enable GitHub Discussions for your repository.
+   - Create/select a Discussions category for blog comments.
+2. Configure giscus values in `.env`:
+   - `PUBLIC_GISCUS_REPO` (e.g. `owner/repo`)
+   - `PUBLIC_GISCUS_REPO_ID`
+   - `PUBLIC_GISCUS_CATEGORY`
+   - `PUBLIC_GISCUS_CATEGORY_ID`
+   - Optional mapping/theme/lang options from `.env.example`
+3. Comments mounting:
+   - component: `src/components/GiscusComments.astro`
+   - config: `src/config/comments.ts`
+   - mounted on post pages: `src/pages/posts/[...slug].astro`
+4. Behavior notes:
+   - If config is incomplete, page shows a clear "not configured" notice.
+   - No secrets are required; keep values in deploy/runtime env.
+
 ## Deploy Blog (GitHub Pages + Custom Domain)
-1. Set Astro deploy variables before build (ops-managed):
-   - `PUBLIC_SITE_URL` (for example: `https://blog.yourdomain.com`)
-   - `PUBLIC_BASE_PATH` (normally `/` for custom domain, or repo subpath for project pages)
-2. Push repository to GitHub main branch.
-3. Build static output from `03_Products/english-blog` (`npm run build`), output directory is `dist/`.
-4. In repository settings, enable GitHub Pages with the chosen publish strategy (manual artifact or CI workflow in later issue).
-5. Add your domain in GitHub Pages custom domain field.
-6. In your DNS provider, create records:
-   - `CNAME` for `www` to `<your-github-username>.github.io`
-   - `A`/`ALIAS` for apex domain as required by your provider
-7. Verify domain status in GitHub Pages and test both desktop/mobile.
+1. Configure deployment env values (do not commit secrets):
+   - `PUBLIC_SITE_URL`
+   - `PUBLIC_BASE_PATH`
+2. `PUBLIC_BASE_PATH` rule:
+   - custom domain/user pages (`https://blog.example.com`): `/`
+   - project pages (`https://<user>.github.io/<repo>/`): `/<repo>/`
+3. Build and local preview from `03_Products/english-blog`:
+   - `npm run build` (output directory: `dist/`)
+   - `npm run preview`
+4. Optional CI deploy workflow:
+   - file: `.github/workflows/blog-pages.yml`
+   - set repository variables in GitHub:
+     - `PUBLIC_SITE_URL`
+     - `PUBLIC_BASE_PATH`
+5. Custom domain handoff:
+   - set domain in GitHub Pages settings
+   - create DNS records (`CNAME` for `www`; `A/ALIAS` for apex as provider requires)
+   - wait for cert issuance and verify HTTPS
+6. Full runbook:
+   - `docs/deploy-blog-pages-v1.md`

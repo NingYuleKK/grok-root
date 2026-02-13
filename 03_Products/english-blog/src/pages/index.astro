@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import NewsletterForm from "../components/NewsletterForm.astro";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -37,4 +38,6 @@ const posts = (await getCollection("blog")).sort(
       }
     </ul>
   </section>
+
+  <NewsletterForm placement="home" />
 </BaseLayout>

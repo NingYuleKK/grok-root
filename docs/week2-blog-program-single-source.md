@@ -15,9 +15,9 @@ Upgrade the English blog MVP into a long-term Astro-based writing system with:
 ## Current Status
 - Issue A: DONE + accepted
 - Issue B: DONE + accepted
-- Issue C: TODO
-- Issue D: TODO
-- Issue E: TODO
+- Issue C: DONE + accepted
+- Issue D: DONE + accepted
+- Issue E: DONE + accepted
 
 ## Issue A - Migrate to Astro + Native Tags
 Status: DONE
@@ -57,8 +57,9 @@ Delivered:
 - documented UI conventions
 
 ## Issue C - Newsletter Subscription v1
-Status: TODO
+Status: DONE
 Spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-C-newsletter-v1.md`
+Acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-C-acceptance-report.md`
 
 Goal:
 - Add replaceable newsletter subscribe integration (embed/plug-in first).
@@ -69,8 +70,9 @@ Acceptance Criteria:
 - No secrets committed; placeholders documented
 
 ## Issue D - Comments v1 via giscus
-Status: TODO
+Status: DONE
 Spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-D-comments-giscus.md`
+Acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-D-acceptance-report.md`
 
 Goal:
 - Add post-level reader interaction using GitHub Discussions (giscus).
@@ -81,8 +83,9 @@ Acceptance Criteria:
 - Build passes with clear setup docs
 
 ## Issue E - Deploy-ready v1
-Status: TODO
+Status: DONE + accepted
 Spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-E-deploy-ready-v1.md`
+Acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-E-acceptance-report.md`
 
 Goal:
 - Produce ops-ready deployment path for GitHub Pages + custom domain.
@@ -92,16 +95,22 @@ Acceptance Criteria:
 - Docs cover `site/base`, output dir, and domain handoff
 - Optional Pages workflow documented if enabled
 
+Delivered (current):
+- deployment runbook: `docs/deploy-blog-pages-v1.md`
+- optional pages workflow: `.github/workflows/blog-pages.yml`
+- root README deploy section upgraded for ops handoff
+- runtime verification completed on node-enabled environment (`npm install`, `npm run build`, `npm run preview`)
+
 ## Handoff Protocol (Cross-Device / Cross-Agent)
 At task start:
 1. Read `AGENTS.md`
 2. Read `MEMORY.md`
-3. Read this file
-4. Open active issue spec
+3. Read `docs/PROJECT_MAP.md`
+4. Read this file
+5. Open active issue spec
 
 At task end:
 1. Update issue status/evidence docs
 2. Update `MEMORY.md` (Now/Decisions/TODO)
 3. Update `docs/DECISIONS.md` and `README.md` if behavior/process changed
 4. Commit + push
-
