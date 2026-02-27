@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { posts: posts.filter((p) => p.data.tags.includes(tag)) },
+  }));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const selectedTag = tag;
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={`#${selectedTag} | Litch's Grok Log`} description={`Posts tagged ${selectedTag}`}>
+  <section class="section-block">
+    <h1>#{selectedTag}</h1>
+    <p class="lede">
+      <a href={`${base}/tags/`}>← All tags</a>
+    </p>
+    <ul class="post-list">
+      {
+        posts.map((post) => (
+          <li class="post-item">
+            <p class="meta">{post.data.pubDate.toISOString().slice(0, 10)}</p>
+            <h2>
+              <a href={`${base}/posts/${post.slug}/`}>{post.data.title}</a>
+            </h2>
+            <p>{post.data.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

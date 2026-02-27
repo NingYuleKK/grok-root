@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Litchi Notes</title>
+    <meta
+      name="description"
+      content="Litchi Notes: practical writing on product thinking, engineering habits, and AI collaboration."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+
+    <header class="container hero">
+      <p class="eyebrow">ENGLISH BLOG MVP</p>
+      <h1>Litchi Notes</h1>
+      <p class="hero-copy">
+        Building in public: product sense, engineering rhythm, and AI-native
+        collaboration.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="./posts/first-post.html">Read first post</a>
+        <a class="btn btn-secondary" href="#subscribe">Join newsletter</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="section">
+        <h2>Latest Writing</h2>
+        <article class="post-card reveal">
+          <p class="meta">Feb 2026 · 6 min read</p>
+          <h3>Week 2 Build Log: Why Workflow Beats Motivation</h3>
+          <p>
+            I used to start projects with high energy and lose consistency in
+            week two. This time, I designed the workflow first and let momentum
+            come from repeatable steps.
+          </p>
+          <a class="inline-link" href="./posts/first-post.html">Open article</a>
+        </article>
+      </section>
+
+      <section class="section subscribe reveal" id="subscribe">
+        <h2>Weekly Notes</h2>
+        <p>
+          One practical email per week: what I built, what failed, and what I
+          would do differently.
+        </p>
+        <form id="subscribe-form" novalidate>
+          <label for="email" class="sr-only">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required
+          />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p id="subscribe-message" class="form-message" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <p>© 2026 Litchi Notes</p>
+    </footer>
+
+    <script src="./assets/app.js"></script>
+  </body>
+</html>
+

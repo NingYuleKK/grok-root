@@ -1,0 +1,80 @@
+---
+import { newsletterConfig } from "../config/newsletter";
+
+interface Props {
+  placement: "home" | "post";
+}
+
+const { placement } = Astro.props;
+const formId = `newsletter-form-${placement}`;
+const messageId = `newsletter-message-${placement}`;
+---
+
+<section class="newsletter section-block" data-newsletter-root>
+  <h2>{placement === "home" ? "Weekly Notes" : "Continue the Conversation"}</h2>
+  <p class="lede">
+    One practical update every week: what shipped, what failed, and what changed.
+  </p>
+
+  <form
+    id={formId}
+    class="newsletter-form"
+    data-newsletter-form
+    data-mode={newsletterConfig.mode}
+    data-action-url={newsletterConfig.actionUrl}
+    data-provider={newsletterConfig.providerName}
+    action={newsletterConfig.actionUrl || "#"}
+    method="post"
+    target="_blank"
+    novalidate
+  >
+    <label class="sr-only" for={`${formId}-email`}>Email</label>
+    <input
+      id={`${formId}-email`}
+      name="email"
+      type="email"
+      placeholder="you@example.com"
+      autocomplete="email"
+      required
+    />
+    <input type="hidden" name="source" value={newsletterConfig.sourceLabel} />
+    <button type="submit">Subscribe</button>
+  </form>
+  <p id={messageId} class="newsletter-message" data-newsletter-message aria-live="polite"></p>
+</section>
+
+<script is:inline>
+  const root = document.currentScript?.previousElementSibling;
+  const form = root?.querySelector("[data-newsletter-form]");
+  const message = root?.querySelector("[data-newsletter-message]");
+  const emailInput = form?.querySelector('input[type="email"]');
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (form && message && emailInput) {
+    form.addEventListener("submit", (event) => {
+      const mode = form.dataset.mode || "placeholder";
+      const actionUrl = form.dataset.actionUrl || "";
+      const provider = form.dataset.provider || "newsletter service";
+      const email = emailInput.value.trim();
+
+      if (!emailPattern.test(email)) {
+        event.preventDefault();
+        message.textContent = "Please enter a valid email address.";
+        message.dataset.state = "error";
+        return;
+      }
+
+      if (!actionUrl || mode === "placeholder") {
+        event.preventDefault();
+        message.textContent = `Newsletter is not configured yet. Add provider/action URL to enable ${provider}.`;
+        message.dataset.state = "error";
+        return;
+      }
+
+      message.textContent = `Redirecting to ${provider} subscription...`;
+      message.dataset.state = "info";
+    });
+  }
+</script>
+

@@ -1,0 +1,35 @@
+---
+import { commentsConfig, isCommentsConfigured } from "../config/comments";
+
+const enabled = isCommentsConfigured(commentsConfig);
+---
+
+<section class="comments section-block">
+  <h2>Comments</h2>
+  {
+    enabled ? (
+      <script
+        src="https://giscus.app/client.js"
+        data-repo={commentsConfig.repo}
+        data-repo-id={commentsConfig.repoId}
+        data-category={commentsConfig.category}
+        data-category-id={commentsConfig.categoryId}
+        data-mapping={commentsConfig.mapping}
+        data-strict={commentsConfig.strict}
+        data-reactions-enabled={commentsConfig.reactionsEnabled}
+        data-emit-metadata={commentsConfig.emitMetadata}
+        data-input-position={commentsConfig.inputPosition}
+        data-theme={commentsConfig.theme}
+        data-lang={commentsConfig.lang}
+        crossorigin="anonymous"
+        async
+      />
+    ) : (
+      <p class="comments-note">
+        Comments are not configured yet. Set giscus values in `.env` to enable
+        discussions.
+      </p>
+    )
+  }
+</section>
+

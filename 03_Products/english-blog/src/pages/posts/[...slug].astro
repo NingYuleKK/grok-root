@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NewsletterForm from "../../components/NewsletterForm.astro";
+import GiscusComments from "../../components/GiscusComments.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={`${post.data.title} | Litch's Grok Log`} description={post.data.description}>
+  <article class="post section-block">
+    <p class="meta">{post.data.pubDate.toISOString().slice(0, 10)}</p>
+    <h1>{post.data.title}</h1>
+    <p class="post-desc lede">{post.data.description}</p>
+    <p class="tags">
+      {post.data.tags.map((tag) => (
+        <a class="tag" href={`${base}/tags/${encodeURIComponent(tag)}/`}>#{tag}</a>
+      ))}
+    </p>
+    <Content />
+  </article>
+
+  <NewsletterForm placement="post" />
+  <GiscusComments />
+</BaseLayout>
