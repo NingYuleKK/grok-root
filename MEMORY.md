@@ -88,6 +88,8 @@ Owner: litch
   - Store only recovery method, case evidence, command templates, and handover docs under `05_Operations/typeless-recovery-channel/`.
   - Use forensic backup copies under `~/RootMemory/typeless_forensic_<timestamp>` as the analysis source, never the live Typeless database.
   - Preserve timestamped source layers before any semantic summary, tagging, or cortex recovery digest.
+  - Treat Typeless app/source context as provenance, not relationship attribution; do not infer `intended_addressee` from app name alone.
+  - For second-device recovery, produce a single-device package first, then a merged package with duplicate indexes and conflict tables.
 
 ## TODO
 - [x] Day 0: create template repo skeleton:
@@ -115,6 +117,7 @@ Owner: litch
 - [ ] Week 7: connect memory search/upsert via MCP.
 - [ ] Week 8: release v0.1 + changelog + retrospective blog post.
 - [x] Preserve Typeless recovery channel docs for Root/Co-teacher continuation.
+- [x] Add ChatGPT-only long-entry distinction and Typeless attribution boundary to recovery docs.
 - [ ] Run Typeless recovery channel on office computer if Typeless history exists there.
 
 ## Links

@@ -116,6 +116,7 @@ Generated files:
 - `typeless_chatgpt_chronological.md`
 - `typeless_by_day/YYYY-MM-DD.md`
 - `typeless_long_entries_200plus.md`
+- `typeless_chatgpt_long_entries_200plus.md`
 - `typeless_audio_manifest.tsv`
 - `README_DATA_BOUNDARY.md`
 
@@ -123,11 +124,14 @@ Validation:
 
 - All exportable text rows: 1886
 - ChatGPT / ChatGPT Atlas / chatgpt.com rows: 1127
-- Long entries with `len(refined_text) >= 200`: 203
+- Global long entries with `len(refined_text) >= 200`: 203
+- ChatGPT-only long entries with `len(refined_text) >= 200`: 106
 - Day files: 49
 - JSONL files parsed successfully.
 - JSONL files were sorted by `created_at`.
 - New ChatGPT chronological JSONL had the same 1127 IDs as the earlier ChatGPT-focused export.
+
+`typeless_long_entries_200plus.md` is a global long-entry file and may include non-ChatGPT sources such as unknown apps, Claude, Gemini, Notion, Codex, WeChat, and others. Use `typeless_chatgpt_long_entries_200plus.md` for the high-confidence Root main-timeline long-entry subset.
 
 ## Data Boundary
 
@@ -142,4 +146,3 @@ No raw transcript text, audio, cookies, app database, or personal chat body is c
 The Typeless recovery channel is now proven on one Mac and documented for reuse on the office computer or future machines.
 
 The next meaningful derivative layer is a Root/Cortex recovery pass over the private chronological files, not further probing of the live Typeless app.
-

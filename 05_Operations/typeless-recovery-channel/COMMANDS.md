@@ -96,10 +96,15 @@ The hashes should match if the live database did not change during copying.
 
 ## 4. Export Timestamped Layer
 
-Use the home-machine script as a reference, but keep outputs outside git:
+Use the repo script, but keep outputs outside git:
 
-```text
-/Users/kk/Desktop/LitchCodex/outputs/typeless-history-export/build_chronological_layer.py
+```bash
+python3 "$WORKBENCH/Litchi/05_Operations/typeless-recovery-channel/scripts/build_typeless_chronological_layer.py" \
+  --db "$BACKUP_DIR/files/Library/Application Support/Typeless/typeless.db" \
+  --output-dir "$WORKBENCH/outputs/typeless-history-export-<source-device>" \
+  --source-device "<source-device>" \
+  --source-db-sha256 "<sha256-of-copied-db>" \
+  --source-backup-dir "$BACKUP_DIR"
 ```
 
 Expected output set:
@@ -109,6 +114,7 @@ Expected output set:
 - `typeless_chatgpt_chronological.md`
 - `typeless_by_day/YYYY-MM-DD.md`
 - `typeless_long_entries_200plus.md`
+- `typeless_chatgpt_long_entries_200plus.md`
 - `typeless_audio_manifest.tsv`
 - `README_DATA_BOUNDARY.md`
 
@@ -122,3 +128,31 @@ If adapting manually, preserve these rules:
 - include `audio_local_path`
 - include both UTC and local timestamps in Markdown
 
+For multi-device recovery, add these fields to JSONL/manifest outputs before merging:
+
+- `source_device`
+- `source_db_sha256`
+- `source_backup_dir`
+- `row_id`
+- `created_at_utc`
+- `created_at_local`
+- `focused_app_name`
+- `domain`
+- `text_hash`
+
+Do not deduplicate merged packages by text alone. Preserve duplicate indexes and produce a conflict table for duplicate/similar text across devices.
+
+## 5. Attribution Boundary For Derivative Layers
+
+Use app context as provenance, not as relationship truth.
+
+Recommended derivative fields:
+
+- `source_app`: actual app where Typeless input occurred.
+- `surface_address`: address terms present in the text.
+- `possible_root_origin`: `true` only when the item may have originated as a Root prompt copied into another app.
+- `rewrite_by_other_model`: `true` only when another model/app appears to have changed address terms.
+- `confidence`: `low`, `medium`, or `high`.
+- `notes`: concise provenance note.
+
+Do not rewrite original text. Do not set `intended_addressee` from `focused_app_name` alone.

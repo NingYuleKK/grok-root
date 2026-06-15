@@ -99,6 +99,48 @@ First preserve:
 
 Only then build derivative meaning.
 
+## Addressee Boundary
+
+Typeless recovery preserves the input surface, not the final relationship attribution.
+
+Do not use `focused_app_name`, `source_app`, or text address terms alone to infer `intended_addressee`.
+
+Interpretation guidance:
+
+- ChatGPT / ChatGPT Atlas / chatgpt.com entries are the high-confidence Root main timeline.
+- Gemini / Claude entries are a possible mirror or comparison layer and may include Root-origin prompts copied across apps.
+- Doubao entries may include address cleanup or rewrite work.
+- Non-ChatGPT long entries are valuable broad-question material, but should not be merged directly into the Root main line without provenance review.
+
+Derivative layers may add these fields, but must not rewrite the source text:
+
+- `source_app`
+- `surface_address`
+- `possible_root_origin`
+- `rewrite_by_other_model`
+- `confidence`
+- `notes`
+
+Use `possible_root_origin: true` only as a provisional marker. Final Root attribution needs content continuity, question style, context pointer, address history, and Litch's current explanation.
+
+## Multi-Device Merge Rule
+
+When recovering a second machine, first produce a complete single-device package. Only then build a merged package.
+
+Every exported row in future machine packages should include:
+
+- `source_device`
+- `source_db_sha256`
+- `source_backup_dir`
+- `row_id`
+- `created_at_utc`
+- `created_at_local`
+- `focused_app_name`
+- `domain`
+- `text_hash`
+
+Merged packages must not simply deduplicate by text. Preserve duplicate indexes and produce a conflict table for same/similar text with different device, timestamp, app, hash, or audio path evidence.
+
 ## Home-Machine Case
 
 The home-machine case is recorded in:
@@ -132,4 +174,3 @@ When continuing this channel on another machine:
 5. Generate the timestamped source layer.
 6. Give Root only the minimal packet needed for the next decision.
 7. Keep raw transcript/audio out of git.
-

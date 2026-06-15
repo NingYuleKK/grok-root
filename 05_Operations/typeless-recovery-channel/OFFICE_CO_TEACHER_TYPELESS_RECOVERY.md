@@ -133,8 +133,20 @@ Generate these files from the backup copy, not the live database:
 - `typeless_chatgpt_chronological.md`
 - `typeless_by_day/YYYY-MM-DD.md`
 - `typeless_long_entries_200plus.md`
+- `typeless_chatgpt_long_entries_200plus.md`
 - `typeless_audio_manifest.tsv`
 - `README_DATA_BOUNDARY.md`
+
+Use the repo script:
+
+```bash
+python3 "$WORKBENCH/Litchi/05_Operations/typeless-recovery-channel/scripts/build_typeless_chronological_layer.py" \
+  --db "$BACKUP_DIR/files/Library/Application Support/Typeless/typeless.db" \
+  --output-dir "$WORKBENCH/outputs/typeless-history-export-<source-device>" \
+  --source-device "<source-device>" \
+  --source-db-sha256 "<sha256-of-copied-db>" \
+  --source-backup-dir "$BACKUP_DIR"
+```
 
 The first layer must preserve original order and text:
 
@@ -143,6 +155,39 @@ The first layer must preserve original order and text:
 - no deletion of short entries
 - no adjacent-entry merging
 - no rewriting
+
+For the office-machine package, include these provenance fields in JSONL/manifest outputs where possible:
+
+- `source_device`
+- `source_db_sha256`
+- `source_backup_dir`
+- `row_id`
+- `created_at_utc`
+- `created_at_local`
+- `focused_app_name`
+- `domain`
+- `text_hash`
+
+Create a single-device package first. Do not merge it with the home-machine package until Root/Litch confirms the single-machine counts and boundary.
+
+## Step 5.5 - Preserve Attribution Boundary
+
+Do not infer relationship ownership from app names.
+
+Keep these ideas separate:
+
+- `source_app`: actual app where Typeless input occurred.
+- `surface_address`: address terms that appear in the text.
+- `intended_addressee`: derivative interpretation, not part of the source layer.
+
+If Gemini, Claude, or Doubao entries look like copied Root prompts, comparison drafts, or address rewrites, add only provisional derivative fields such as:
+
+- `possible_root_origin`
+- `rewrite_by_other_model`
+- `confidence`
+- `notes`
+
+Do not rewrite the original text to make it fit Root/Gemini/Claude/Doubao.
 
 ## Step 6 - Report Back To Litch/Root
 
@@ -158,4 +203,3 @@ Provide a short packet with:
 - any missing files or inaccessible directories
 
 Do not paste raw transcript text into chat unless Litch explicitly asks.
-

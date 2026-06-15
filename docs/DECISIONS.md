@@ -46,3 +46,5 @@
 - Keep live Typeless databases read-only; copy candidate files into `~/RootMemory/typeless_forensic_<timestamp>`, hash them, and analyze schema/export layers only from the copy.
 - Keep repo contents method-only: commit runbooks, handover, command templates, counts, and case evidence; do not commit raw `refined_text`, `.ogg` audio, app databases, cookies, personal chat bodies, or credentials.
 - Preserve chronological source layers before derivative intelligence: no summary, no semantic labels, no deduplication, no adjacent-entry merging until Root/Codex has the timestamped layer.
+- Attribution boundary: Typeless proves the input surface, not the relationship owner. Keep `source_app` separate from `surface_address` and do not infer `intended_addressee` from app name alone.
+- Multi-device merge decision: recover each device into a complete single-device package first, then create merged packages that preserve duplicate indexes and conflict tables instead of text-only deduplication.
