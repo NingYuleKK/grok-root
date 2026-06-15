@@ -1,11 +1,11 @@
 # MEMORY
 
-Last Updated: 2026-02-13
+Last Updated: 2026-02-14
 Owner: litch
 
 ## Now
 - Goal: build engineering habits with an 8-week "vibe coding + shipping" plan.
-- Current phase: Week 2 Issue E accepted; ready to start Week 3 conversation importer.
+- Current phase: Week 2 blog deployed on GitHub Pages; post-deploy hardening and content updates completed.
 - Weekly operating model:
   - Delivery track: one runnable/publishable/demoable output each week.
   - Learning track: one core engineering concept each week.
@@ -70,6 +70,11 @@ Owner: litch
   - upgrade root deploy docs in `README.md` (site/base, dist output, domain handoff)
   - acceptance evidence file: `docs/week2-issue-E-acceptance-report.md`
   - runtime verification passed on node-enabled machine (`npm install`, `npm run build`, `npm run preview`)
+- Post-deploy hardening note (2026-02-14):
+  - fixed all known 404 regressions on live routes (navigation, post links, tags links)
+  - published new post: `Intelligence Is Not Your Skeleton`
+  - blog name updated to `Litch's Grok Log`
+  - deployment and runtime smoke checks passed on GitHub Pages
 - Add AGENTS startup checklist rule: each new task/window must print 5-line kickoff confirmation (memory read, goal, acceptance criteria, branch, close-out docs).
 - Enforce six vibe-coding guardrails:
   - Write 3 acceptance criteria before coding.

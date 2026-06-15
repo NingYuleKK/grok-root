@@ -1,12 +1,12 @@
 # AI Assistant Handbook: English Blog Project
 
-**Version:** 1.0  
-**Date:** 2026-02-13  
+**Version:** 1.1  
+**Date:** 2026-02-14  
 **Author:** Manus
 
 ## 1. Introduction
 
-This document is the complete technical handbook for the **English Blog project**. Any AI assistant (Manus, Codex, or others) should read this file first to understand the project.
+This document is the complete technical handbook for the **Litch's Grok Log** project. Any AI assistant (Manus, Codex, or others) should read this file first to understand the project.
 
 **Your primary directive: Read this document and the referenced files before taking any action.**
 
@@ -14,7 +14,7 @@ This document is the complete technical handbook for the **English Blog project*
 
 ## 2. Project Overview
 
-- **Project Name:** English Blog
+- **Project Name:** Litch's Grok Log
 - **Goal:** Build and maintain a modern personal blog for Litch
 - **Live URL:** https://ningyulekk.github.io/grok-root/
 - **Repository:** git@github.com:NingYuleKK/grok-root.git
@@ -107,10 +107,16 @@ Located at `.github/workflows/blog-pages.yml`
 ### Write New Post
 
 1. Create `.md` file in `03_Products/english-blog/posts/`
-2. Add frontmatter (title, date, tags, author)
+2. Add frontmatter (`title`, `date`, `tags`, `author`)
 3. Write content in Markdown
-4. Preview with `npm run dev`
-5. Commit and push
+4. Verify links/tags/navigation are valid (avoid 404 regressions)
+5. Preview with `npm run dev`
+6. Validate production build (`npm run build` and `npm run preview`)
+7. Commit and push
+8. Confirm live route on GitHub Pages
+
+Latest published post:
+- `Intelligence Is Not Your Skeleton`
 
 ### Test Build
 
@@ -138,6 +144,11 @@ Check GitHub Actions tab for logs
 ### Comments not showing
 
 Verify `.env` has correct giscus config
+
+## 7.1 Known Issues (Current)
+
+- Newsletter is not fully configured in production yet (provider/action URL pending).
+- Comments are not fully configured in production yet (giscus repo/category IDs pending in runtime env).
 
 ---
 

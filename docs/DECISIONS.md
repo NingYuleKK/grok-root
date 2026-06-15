@@ -35,3 +35,8 @@
 - Add optional GitHub Pages workflow (`.github/workflows/blog-pages.yml`) for push-to-main and manual dispatch deployment.
 - Keep deploy config secret-free in repo; pass site/base values through GitHub repository variables.
 - Accept Issue E after runtime proof on node-enabled machine (`npm install`, `npm run build`, `npm run preview`) plus route-level spot checks (home/post/newsletter/tags).
+
+## 2026-02-14
+- Naming decision: rename blog to `Litch's Grok Log` to make ownership explicit (`Litch`) and keep the positioning tied to ongoing AI/HCI exploration (`Grok Log` as continuous thinking + shipping log).
+- Comments decision: keep `giscus` as the comments system because it is repo-native, low-maintenance, and aligns with current GitHub-first workflow (discussion moderation and traceability in one place).
+- Routing decision: keep Astro `base` path environment-driven (`PUBLIC_BASE_PATH`) to support both custom domain root deployment (`/`) and GitHub project pages subpath deployment (`/<repo>/`) without code changes.
