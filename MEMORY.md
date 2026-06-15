@@ -1,11 +1,11 @@
 # MEMORY
 
-Last Updated: 2026-02-14
+Last Updated: 2026-06-15
 Owner: litch
 
 ## Now
-- Goal: build engineering habits with an 8-week "vibe coding + shipping" plan.
-- Current phase: Week 2 blog deployed on GitHub Pages; post-deploy hardening and content updates completed.
+- Goal: keep `Litchi` as the durable operating map for Root/Co-teacher handoff, recovery notes, and engineering habits.
+- Current phase: Typeless recovery channel documented after home-machine forensic recovery; office-machine continuation instructions added.
 - Weekly operating model:
   - Delivery track: one runnable/publishable/demoable output each week.
   - Learning track: one core engineering concept each week.
@@ -83,6 +83,11 @@ Owner: litch
   - Never commit secrets; use `.env` and `.gitignore`.
   - Require Codex review on every PR.
   - Ship/release weekly (even tiny versions).
+- Typeless recovery channel decision (2026-06-15):
+  - Keep raw Typeless exports, audio, copied app databases, cookies, and chat bodies out of git.
+  - Store only recovery method, case evidence, command templates, and handover docs under `05_Operations/typeless-recovery-channel/`.
+  - Use forensic backup copies under `~/RootMemory/typeless_forensic_<timestamp>` as the analysis source, never the live Typeless database.
+  - Preserve timestamped source layers before any semantic summary, tagging, or cortex recovery digest.
 
 ## TODO
 - [x] Day 0: create template repo skeleton:
@@ -109,6 +114,8 @@ Owner: litch
 - [ ] Week 6: ship one-command pipeline (import -> process -> report).
 - [ ] Week 7: connect memory search/upsert via MCP.
 - [ ] Week 8: release v0.1 + changelog + retrospective blog post.
+- [x] Preserve Typeless recovery channel docs for Root/Co-teacher continuation.
+- [ ] Run Typeless recovery channel on office computer if Typeless history exists there.
 
 ## Links
 - Workspace root: `/Users/litch/Desktop/litchcodex`
@@ -133,6 +140,7 @@ Owner: litch
 - Week 2 issue E spec: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-E-deploy-ready-v1.md`
 - Week 2 issue E acceptance: `/Users/litch/Desktop/litchcodex/Litchi/docs/week2-issue-E-acceptance-report.md`
 - Deploy runbook: `/Users/litch/Desktop/litchcodex/Litchi/docs/deploy-blog-pages-v1.md`
+- Typeless recovery channel: `/Users/litch/Desktop/litchcodex/Litchi/05_Operations/typeless-recovery-channel/`
 
 ## Glossary
 - vibe coding: keep creative velocity, but inside engineering constraints.

@@ -40,3 +40,9 @@
 - Naming decision: rename blog to `Litch's Grok Log` to make ownership explicit (`Litch`) and keep the positioning tied to ongoing AI/HCI exploration (`Grok Log` as continuous thinking + shipping log).
 - Comments decision: keep `giscus` as the comments system because it is repo-native, low-maintenance, and aligns with current GitHub-first workflow (discussion moderation and traceability in one place).
 - Routing decision: keep Astro `base` path environment-driven (`PUBLIC_BASE_PATH`) to support both custom domain root deployment (`/`) and GitHub project pages subpath deployment (`/<repo>/`) without code changes.
+
+## 2026-06-15
+- Typeless recovery decision: treat Typeless as a private local source channel for Litch's voice-input questions to Root/GPT, and preserve it through a forensic-copy-first workflow.
+- Keep live Typeless databases read-only; copy candidate files into `~/RootMemory/typeless_forensic_<timestamp>`, hash them, and analyze schema/export layers only from the copy.
+- Keep repo contents method-only: commit runbooks, handover, command templates, counts, and case evidence; do not commit raw `refined_text`, `.ogg` audio, app databases, cookies, personal chat bodies, or credentials.
+- Preserve chronological source layers before derivative intelligence: no summary, no semantic labels, no deduplication, no adjacent-entry merging until Root/Codex has the timestamped layer.
