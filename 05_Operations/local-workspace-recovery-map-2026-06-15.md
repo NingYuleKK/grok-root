@@ -65,3 +65,10 @@ Suggested next actions:
 2. Review and either commit or intentionally discard the local changes in `noonpost` and `rmbti`.
 3. Decide whether `outputs/qin-breath-theatre` should become its own repo or be copied into `Litchi/02_Experiments`.
 4. Keep the old workbench intact until the mirror and active repos have a confirmed successful push.
+
+## Follow-Up Cleanup - 2026-06-15
+
+- `rmbti` was fetched and aligned to `origin/main` at `a687ea2`; the earlier local share-card/layout drift was superseded by remote commits that already moved sharing to a pure Canvas path and removed the `html2canvas` dependency. Local validation passed with `node --check src/app.js` and `node src/engine.test.js`.
+- `noonpost` was fast-forwarded from `d6270e4` to `d44cf27` on `review-pr13...origin/feature/v02-depth`. Validation passed with `npm run check` and `npm test` (`121` tests).
+- The pre-cleanup `noonpost/package-lock.json` metadata-only drift is preserved as a local stash named `wip package-lock metadata drift 2026-06-15`; it touched only `package-lock.json`.
+- Correct `rmbti` HTTP preview root is the repository root with URL `/src/index.html`; serving `src/` directly makes `../assets/...` paths look broken.
