@@ -1,0 +1,477 @@
+:root {
+  color-scheme: dark;
+  --ink: #101417;
+  --ink-2: #182226;
+  --paper: #efe7d2;
+  --mist: #9fb9bc;
+  --jade: #68b19b;
+  --cinnabar: #c65f46;
+  --gold: #d6b461;
+  --wood: #5a3327;
+  --wood-hi: #9a6041;
+  --line: rgba(239, 231, 210, 0.22);
+  --shadow: rgba(0, 0, 0, 0.34);
+  font-family: ui-serif, "Songti SC", "Noto Serif CJK SC", "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(104, 177, 155, 0.2), transparent 28%),
+    radial-gradient(circle at 84% 10%, rgba(198, 95, 70, 0.16), transparent 24%),
+    linear-gradient(135deg, #11171b 0%, #1b2727 45%, #221b19 100%);
+  color: var(--paper);
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+#app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  transition: grid-template-columns 240ms ease;
+}
+
+#theatre {
+  min-width: 0;
+  padding: 26px clamp(18px, 4vw, 52px) 28px;
+  display: grid;
+  grid-template-rows: auto minmax(420px, 1fr) auto;
+  gap: 18px;
+}
+
+#topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.kicker,
+.eyebrow {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+h1 {
+  margin: 4px 0 0;
+  font-size: clamp(38px, 6vw, 78px);
+  line-height: 0.95;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+#breathMeter {
+  width: min(28vw, 210px);
+  height: 12px;
+  border: 1px solid var(--line);
+  background: rgba(16, 20, 23, 0.42);
+  overflow: hidden;
+}
+
+#breathMeter span {
+  display: block;
+  width: 72%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--jade), var(--gold), var(--cinnabar));
+  transform-origin: left center;
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+#stageWrap {
+  position: relative;
+  min-height: 420px;
+  border: 1px solid rgba(239, 231, 210, 0.12);
+  background:
+    linear-gradient(180deg, rgba(239, 231, 210, 0.04), transparent 22%),
+    rgba(9, 13, 15, 0.18);
+  box-shadow: 0 26px 80px var(--shadow);
+  overflow: hidden;
+}
+
+#stage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+#gestureCue {
+  position: absolute;
+  left: clamp(16px, 3vw, 38px);
+  top: clamp(16px, 3vw, 34px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+#cueGlyph {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(239, 231, 210, 0.3);
+  background: rgba(16, 20, 23, 0.54);
+  color: var(--gold);
+  font-size: 32px;
+  line-height: 1;
+}
+
+#cueMeta {
+  display: grid;
+  gap: 3px;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.58);
+}
+
+#cueMeta strong {
+  font-size: 21px;
+  font-weight: 500;
+}
+
+#cueMeta span {
+  color: var(--mist);
+  font-size: 13px;
+}
+
+#judge {
+  position: absolute;
+  left: 50%;
+  top: 19%;
+  transform: translate(-50%, -50%);
+  color: var(--paper);
+  font-size: clamp(34px, 6vw, 74px);
+  text-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#judge.show {
+  animation: judgeRise 740ms ease forwards;
+}
+
+@keyframes judgeRise {
+  0% {
+    transform: translate(-50%, -42%) scale(0.95);
+    opacity: 0;
+  }
+  22% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -72%) scale(1.04);
+    opacity: 0;
+  }
+}
+
+#countdown {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(74px, 16vw, 180px);
+  color: rgba(239, 231, 210, 0.72);
+  pointer-events: none;
+}
+
+#stringKeys {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(34px, 1fr));
+  gap: 8px;
+}
+
+#stringKeys button,
+.segmented button,
+.primary,
+.closeBtn {
+  border: 1px solid rgba(239, 231, 210, 0.22);
+  background: rgba(16, 20, 23, 0.52);
+  min-height: 42px;
+  transition: transform 120ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+#stringKeys button {
+  color: var(--mist);
+  font-size: 18px;
+}
+
+#stringKeys button.active,
+.segmented button.active {
+  border-color: rgba(214, 180, 97, 0.78);
+  background: rgba(214, 180, 97, 0.16);
+  color: var(--paper);
+}
+
+#stringKeys button:active,
+.segmented button:active,
+.primary:active {
+  transform: translateY(1px);
+}
+
+#panel {
+  border-left: 1px solid rgba(239, 231, 210, 0.13);
+  background: rgba(12, 17, 19, 0.58);
+  backdrop-filter: blur(18px);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  transition: opacity 200ms ease, padding 240ms ease, background 240ms ease;
+}
+
+.panelBlock {
+  display: grid;
+  gap: 10px;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(86px, 1fr));
+  gap: 8px;
+}
+
+#modePick {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.segmented button {
+  min-width: 0;
+  padding: 0 10px;
+  color: var(--mist);
+}
+
+#handState {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+#handState div {
+  min-height: 64px;
+  border: 1px solid rgba(239, 231, 210, 0.14);
+  background: rgba(239, 231, 210, 0.045);
+  padding: 10px;
+}
+
+#handState span {
+  display: block;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  color: var(--mist);
+}
+
+#handState strong {
+  display: block;
+  margin-top: 7px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+#puPanel {
+  min-height: 184px;
+}
+
+#puGlyph {
+  min-height: 76px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(214, 180, 97, 0.34);
+  background:
+    linear-gradient(135deg, rgba(239, 231, 210, 0.08), rgba(104, 177, 155, 0.05)),
+    rgba(16, 20, 23, 0.42);
+  color: var(--gold);
+  font-size: 38px;
+}
+
+#puBreakdown {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+#puBreakdown span {
+  min-height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(239, 231, 210, 0.12);
+  color: var(--mist);
+  font-size: 13px;
+}
+
+.primary {
+  margin-top: auto;
+  min-height: 52px;
+  background: linear-gradient(135deg, rgba(104, 177, 155, 0.28), rgba(198, 95, 70, 0.22));
+  border-color: rgba(239, 231, 210, 0.34);
+  font-size: 18px;
+}
+
+body:not([data-mode="pu"]) #stringKeys,
+body:not([data-mode="pu"]) #handBlock,
+body:not([data-mode="pu"]) #puPanel {
+  display: none;
+}
+
+body.playing #app {
+  grid-template-columns: minmax(0, 1fr) 116px;
+}
+
+body.playing #panel {
+  justify-content: flex-end;
+  padding: 24px 14px;
+  background: rgba(12, 17, 19, 0.24);
+}
+
+body.playing #panel .panelBlock {
+  display: none;
+}
+
+body.playing #startBtn {
+  min-height: 78px;
+  writing-mode: vertical-rl;
+  justify-self: stretch;
+  margin-top: 0;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 8, 10, 0.62);
+  z-index: 20;
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.ticketCard {
+  width: min(560px, 100%);
+  position: relative;
+  border: 1px solid rgba(239, 231, 210, 0.28);
+  background:
+    linear-gradient(135deg, rgba(24, 34, 38, 0.96), rgba(35, 25, 22, 0.96)),
+    var(--ink);
+  padding: 28px;
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.52);
+}
+
+.closeBtn {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  width: 34px;
+  min-height: 34px;
+}
+
+.ticketCard h2 {
+  margin: 8px 0 20px;
+  font-size: 34px;
+  font-weight: 500;
+}
+
+#ticketGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+#ticketGrid div {
+  border: 1px solid rgba(239, 231, 210, 0.14);
+  padding: 12px 10px;
+  min-height: 70px;
+}
+
+#ticketGrid span {
+  display: block;
+  color: var(--mist);
+  font-size: 12px;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+#ticketGrid strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+#ticketLine {
+  margin: 20px 0 0;
+  color: rgba(239, 231, 210, 0.86);
+  line-height: 1.7;
+}
+
+@media (max-width: 920px) {
+  #app {
+    grid-template-columns: 1fr;
+  }
+
+  body.playing #app {
+    grid-template-columns: 1fr;
+  }
+
+  #theatre {
+    min-height: 70vh;
+    grid-template-rows: auto minmax(390px, 58vh) auto;
+  }
+
+  #panel {
+    border-left: 0;
+    border-top: 1px solid rgba(239, 231, 210, 0.13);
+  }
+
+  body.playing #panel {
+    padding: 12px;
+  }
+
+  body.playing #startBtn {
+    min-height: 48px;
+    writing-mode: horizontal-tb;
+  }
+}
+
+@media (max-width: 560px) {
+  #theatre {
+    padding: 18px 12px;
+    grid-template-rows: auto minmax(360px, 56vh) auto;
+  }
+
+  #stageWrap {
+    min-height: 360px;
+  }
+
+  #gestureCue {
+    gap: 8px;
+  }
+
+  #cueGlyph {
+    width: 52px;
+    height: 52px;
+    font-size: 28px;
+  }
+
+  #stringKeys {
+    gap: 5px;
+  }
+
+  #ticketGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

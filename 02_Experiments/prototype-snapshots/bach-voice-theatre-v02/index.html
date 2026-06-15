@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Bach Voice Theatre</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app">
+    <section id="shell">
+      <header id="topbar">
+        <div>
+          <div class="kicker">Bach Voice Theatre</div>
+          <h1 id="pieceTitle">选一条声部，剩下的交给幽灵。</h1>
+        </div>
+        <div id="scoreBox">
+          <span id="modeBadge">PLAY</span>
+          <strong id="score">0</strong>
+        </div>
+      </header>
+
+      <div id="stageWrap">
+        <canvas id="stage"></canvas>
+        <div id="octoLayer"></div>
+        <div id="combo"><strong id="comboN">0</strong><span>COMBO</span></div>
+        <div id="judge"></div>
+        <div id="sectionCue"><strong id="sectionBig"></strong><span id="sectionSmall"></span></div>
+        <div id="countdown"><span id="countNum"></span></div>
+      </div>
+
+      <div id="keys">
+        <button class="laneKey" data-lane="0">D</button>
+        <button class="laneKey" data-lane="1">F</button>
+        <button class="laneKey" data-lane="2">J</button>
+        <button class="laneKey" data-lane="3">K</button>
+      </div>
+    </section>
+
+    <aside id="panel">
+      <div class="panelBlock">
+        <div class="eyebrow">Piece</div>
+        <div class="segmented" id="piecePick">
+          <button class="active" data-piece="fugue">Fugue</button>
+          <button data-piece="prelude">Prelude</button>
+          <button data-piece="cmajor">846 Gate</button>
+        </div>
+      </div>
+
+      <div class="panelBlock">
+        <div class="eyebrow">Mode</div>
+        <div class="segmented" id="modePick">
+          <button class="active" data-mode="play">Play</button>
+          <button data-mode="follow">Follow</button>
+          <button data-mode="listen">Listen</button>
+        </div>
+      </div>
+
+      <div class="panelBlock" id="voiceBlock">
+        <div class="eyebrow">Voice</div>
+        <div id="voicePick"></div>
+      </div>
+
+      <div class="panelBlock">
+        <div class="eyebrow">Latency</div>
+        <div class="latencyRow">
+          <span id="latencyRead">0 ms</span>
+          <button id="calibrateBtn">校准</button>
+        </div>
+      </div>
+
+      <div class="panelBlock noteBlock">
+        <div class="eyebrow">Compass</div>
+        <p id="compassText">你照看中声部。主题第一次开口，另外两只章鱼会托住其余声部。</p>
+      </div>
+
+      <button id="startBtn" class="primary">开始演奏</button>
+    </aside>
+
+    <section id="ticket" class="overlay hidden">
+      <article class="ticketCard">
+        <button class="closeBtn" id="closeTicket" aria-label="关闭">×</button>
+        <div class="eyebrow">Counterpoint Ticket</div>
+        <h2 id="ticketTitle">BWV 847 Fuga · Alto</h2>
+        <div id="ticketGrid"></div>
+        <p id="ticketLine"></p>
+        <p id="ticketObservation"></p>
+        <button id="againBtn" class="primary">再来一遍</button>
+      </article>
+    </section>
+
+    <section id="calibration" class="overlay hidden">
+      <article class="calCard">
+        <button class="closeBtn" id="closeCal" aria-label="关闭">×</button>
+        <div class="eyebrow">Latency Calibration</div>
+        <h2>听到金色 tick 时按任意键</h2>
+        <p>会取 4 次平均值。蓝牙耳机通常会有 100-300ms 延迟，这里会把判定时间向后补偿。</p>
+        <div id="calPulse"></div>
+        <div id="calStatus">准备校准</div>
+        <button id="runCal" class="primary">开始校准</button>
+      </article>
+    </section>
+  </main>
+  <script src="app.js?v=0.3.0"></script>
+</body>
+</html>

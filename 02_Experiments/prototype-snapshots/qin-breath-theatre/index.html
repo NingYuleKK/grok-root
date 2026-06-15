@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>弦外 Qin Breath Theatre</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app">
+    <section id="theatre">
+      <header id="topbar">
+        <div>
+          <div class="kicker">Qin Breath Theatre</div>
+          <h1>弦外</h1>
+        </div>
+        <div id="breathMeter" aria-label="气">
+          <span></span>
+        </div>
+      </header>
+
+      <div id="stageWrap">
+        <canvas id="stage"></canvas>
+        <div id="gestureCue">
+          <div id="cueGlyph">候</div>
+          <div id="cueMeta">
+            <strong id="cueTitle">静候</strong>
+            <span id="cueSub">一弦入山</span>
+          </div>
+        </div>
+        <div id="judge"></div>
+        <div id="countdown"></div>
+      </div>
+
+      <div id="stringKeys" aria-label="七弦">
+        <button data-string="0">一</button>
+        <button data-string="1">二</button>
+        <button data-string="2">三</button>
+        <button data-string="3">四</button>
+        <button data-string="4">五</button>
+        <button data-string="5">六</button>
+        <button data-string="6">七</button>
+      </div>
+    </section>
+
+    <aside id="panel">
+      <section class="panelBlock" id="handBlock">
+        <div class="eyebrow">Piece</div>
+        <div class="segmented" id="piecePick">
+          <button class="active" data-piece="xianweng">仙翁操</button>
+          <button data-piece="enterMountain">一弦入山</button>
+          <button data-piece="clearNight">良宵影</button>
+        </div>
+      </section>
+
+      <section class="panelBlock">
+        <div class="eyebrow">Mode</div>
+        <div class="segmented" id="modePick">
+          <button class="active" data-mode="follow">随</button>
+          <button data-mode="listen">听</button>
+          <button data-mode="pu">谱</button>
+        </div>
+      </section>
+
+      <section class="panelBlock">
+        <div class="eyebrow">Hand</div>
+        <div id="handState">
+          <div><span>弦</span><strong id="stringRead">一</strong></div>
+          <div><span>徽</span><strong id="huiRead">七六</strong></div>
+          <div><span>息</span><strong id="stillRead">未起</strong></div>
+        </div>
+      </section>
+
+      <section class="panelBlock" id="puPanel">
+        <div class="eyebrow">Jianzipu</div>
+        <div id="puGlyph">散一</div>
+        <div id="puBreakdown"></div>
+      </section>
+
+      <button id="startBtn" class="primary">入弦</button>
+    </aside>
+
+    <section id="ticket" class="overlay hidden">
+      <article class="ticketCard">
+        <button class="closeBtn" id="closeTicket" aria-label="关闭">×</button>
+        <div class="eyebrow">琴札</div>
+        <h2 id="ticketTitle">一弦入山</h2>
+        <div id="ticketGrid"></div>
+        <p id="ticketLine"></p>
+        <button id="againBtn" class="primary">再入一遍</button>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js?v=0.2.0"></script>
+</body>
+</html>
