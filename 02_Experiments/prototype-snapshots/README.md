@@ -10,6 +10,7 @@ The original output folders remain untouched. These snapshots exist so the conce
 | --- | --- | --- |
 | `qin-breath-theatre` | `/Users/kk/Desktop/LitchCodex/outputs/qin-breath-theatre` | `cd 02_Experiments/prototype-snapshots/qin-breath-theatre && python3 -m http.server 4196` |
 | `bach-voice-theatre-v02` | `/Users/kk/Desktop/LitchCodex/outputs/bach-voice-theatre-v02` | `cd 02_Experiments/prototype-snapshots/bach-voice-theatre-v02 && python3 -m http.server 4182` |
+| `electron-cloud-visualizer` | `/Users/kk/Desktop/LitchCodex/electron-cloud` | `cd 02_Experiments/prototype-snapshots/electron-cloud-visualizer && npm install && npm run dev` |
 
 ## Rules
 

@@ -1,0 +1,19 @@
+{
+  "name": "electron-cloud-visualizer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "verify:visual": "node scripts/verify-visual.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "playwright-core": "^1.59.1",
+    "pngjs": "^7.0.0",
+    "three": "^0.180.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9"
+  }
+}

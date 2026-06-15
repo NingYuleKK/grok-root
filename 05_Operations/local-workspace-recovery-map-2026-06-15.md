@@ -73,3 +73,4 @@ Suggested next actions:
 - The pre-cleanup `noonpost/package-lock.json` metadata-only drift is preserved as a local stash named `wip package-lock metadata drift 2026-06-15`; it touched only `package-lock.json`.
 - Correct `rmbti` HTTP preview root is the repository root with URL `/src/index.html`; serving `src/` directly makes `../assets/...` paths look broken.
 - `outputs/qin-breath-theatre` and `outputs/bach-voice-theatre-v02` were copied into `02_Experiments/prototype-snapshots/` as source snapshots; `05_Operations/outputs-inventory-2026-06-15.md` records which outputs are git-protected, local-only, or sensitive review-before-publish artifacts.
+- `electron-cloud` was copied into `02_Experiments/prototype-snapshots/electron-cloud-visualizer` as a source snapshot, excluding `node_modules`, `dist`, and visual verification artifacts. `05_Operations/top-level-workspace-inventory-2026-06-15.md` records the broader top-level partition map.

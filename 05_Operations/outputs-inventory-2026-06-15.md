@@ -11,6 +11,12 @@ These now have source snapshots in `Litchi/02_Experiments/prototype-snapshots/`.
 | `qin-breath-theatre` | Snapshot copied | High-value guqin prototype; original had no git. |
 | `bach-voice-theatre-v02` | Snapshot copied | Local git repo with no remote; snapshot protects source in `Litchi`. |
 
+Related top-level local prototype snapshot:
+
+| Path | Status | Notes |
+| --- | --- | --- |
+| `../electron-cloud` | Snapshot copied | Vite/Three visualizer; source protected without `node_modules`, `dist`, or verification artifacts. |
+
 ## Already Git-Protected
 
 | Output | Status | Notes |
