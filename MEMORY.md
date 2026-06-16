@@ -1,11 +1,11 @@
 # MEMORY
 
-Last Updated: 2026-02-14
+Last Updated: 2026-06-16
 Owner: litch
 
 ## Now
-- Goal: build engineering habits with an 8-week "vibe coding + shipping" plan.
-- Current phase: Week 2 blog deployed on GitHub Pages; post-deploy hardening and content updates completed.
+- Goal: preserve Litch's local Codex workspace after the GPT Pro account disruption, with recoverable maps and safe source commits.
+- Current phase: company-machine recovery pass completed for `Litchi` and `picopico-inspiration`; `picopico` business artifacts are inventoried but not published.
 - Weekly operating model:
   - Delivery track: one runnable/publishable/demoable output each week.
   - Learning track: one core engineering concept each week.
@@ -83,6 +83,10 @@ Owner: litch
   - Never commit secrets; use `.env` and `.gitignore`.
   - Require Codex review on every PR.
   - Ship/release weekly (even tiny versions).
+- Recovery hardening note (2026-06-16):
+  - `Litchi` now contains company-machine inventory and source-only snapshots for local prototypes.
+  - `picopico-inspiration` V2.2 ride brief/source metadata changes were validated and pushed as `a626351`.
+  - `picopico` forecast/cashflow/gross-margin artifacts were classified as review-before-publish; raw `exports/` and `outputs/` remain local.
 
 ## TODO
 - [x] Day 0: create template repo skeleton:
@@ -109,6 +113,10 @@ Owner: litch
 - [ ] Week 6: ship one-command pipeline (import -> process -> report).
 - [ ] Week 7: connect memory search/upsert via MCP.
 - [ ] Week 8: release v0.1 + changelog + retrospective blog post.
+- [x] 2026-06-16 recovery: sync home-machine runbook into company `Litchi`.
+- [x] 2026-06-16 recovery: protect local prototype sources through `Litchi/02_Experiments/prototype-snapshots/`.
+- [x] 2026-06-16 recovery: validate and push `picopico-inspiration` V2.2 source changes.
+- [ ] 2026-06-16 recovery follow-up: decide which `picopico` management docs are internal-publishable versus local-only.
 
 ## Links
 - Workspace root: `/Users/litch/Desktop/litchcodex`
