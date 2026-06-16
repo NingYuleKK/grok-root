@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Co老师看得见的房间</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="room-stage" aria-label="可互动房间">
+        <header class="titlebar">
+          <div>
+            <h1>Co老师看得见的房间</h1>
+            <p>点击房间里的物品，留下可以被屏幕观察读到的状态变化。</p>
+          </div>
+          <button class="reset-button" type="button" data-reset>Reset</button>
+        </header>
+
+        <div class="room" data-room>
+          <button class="room-object lamp" type="button" data-object="lamp">
+            <span class="object-art" aria-hidden="true"></span>
+            <span class="object-label">
+              <span class="object-name">Lamp</span>
+              <span class="object-status" data-status>Dim</span>
+            </span>
+          </button>
+
+          <button class="room-object desk" type="button" data-object="desk">
+            <span class="object-art" aria-hidden="true"></span>
+            <span class="object-label">
+              <span class="object-name">Desk</span>
+              <span class="object-status" data-status>Closed</span>
+            </span>
+          </button>
+
+          <button class="room-object window" type="button" data-object="window">
+            <span class="object-art" aria-hidden="true"></span>
+            <span class="object-label">
+              <span class="object-name">Window</span>
+              <span class="object-status" data-status>Fogged</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <aside class="observer-panel" aria-label="观察记录">
+        <h2>Observation</h2>
+        <p class="observation" data-observation></p>
+
+        <div class="log-wrap">
+          <h3>Room Log</h3>
+          <ol class="event-log" data-log></ol>
+        </div>
+      </aside>
+    </main>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>

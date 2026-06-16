@@ -1,0 +1,185 @@
+import type { Chapter, Gift, GiftTier, Souvenir } from "../types/activity";
+
+const tiers: GiftTier[] = ["low", "low", "low", "low", "mid", "mid", "mid", "mid", "high", "high", "high", "high"];
+const values: Record<GiftTier, number> = { low: 99, mid: 520, high: 1888 };
+
+function gifts(chapterId: string, names: string[]): Gift[] {
+  return names.map((giftName, index) => {
+    const tier = tiers[index];
+    return { giftId: `${chapterId}-gift-${String(index + 1).padStart(2, "0")}`, giftName, tier, diamondValue: values[tier] };
+  });
+}
+
+function souvenirs(chapterId: string, names: string[], chapterName: string): Souvenir[] {
+  return names.map((name, index) => ({
+    souvenirId: `${chapterId}-souvenir-${String(index + 1).padStart(2, "0")}`,
+    name,
+    sourceCopyTemplate: `由主播 桃桃 于《${chapterName}》通关后亲赠。`,
+  }));
+}
+
+function chapter(input: Omit<Chapter, "wallSize" | "milestones" | "sponsorTitles" | "flyBannerCopies">): Chapter {
+  return {
+    ...input,
+    wallSize: 12,
+    milestones: [4, 8, 12],
+    sponsorTitles: ["首席赞助人", "终局点亮人", "陪跑守护人", "入席宾客"],
+    flyBannerCopies: {
+      gift: "{sender} 点亮了 {gift}",
+      milestone4: "桃桃的身份剧场已完成 4/12，入席小动效已解锁",
+      milestone8: "桃桃的玫瑰沙龙已完成 8/12，女主人头像贴纸已解锁",
+      complete: "桃桃的玫瑰沙龙全席点亮",
+      emperor: "首席赞助人 {sender} 送出加冕套，玫瑰王座升起",
+      grandSlam: "桃桃获得大满贯通行证",
+    },
+  };
+}
+
+export const chapters: Chapter[] = [
+  chapter({
+    chapterId: "jianghu-tavern",
+    chapterName: "江湖茶酒肆夜话主人",
+    identityTitle: "夜话主人",
+    identityTagline: "一盏茶开局，一桌人入局",
+    shortStory: "桃桃在江湖茶酒肆重生，靠接住每一段闲谈，把散客聚成夜话同盟。",
+    posterTitle: "江湖茶酒肆开席",
+    posterSubtitle: "点亮十二件江湖信物，帮主播坐稳夜话主位。",
+    certificateTitle: "江湖茶酒肆夜话主人证书",
+    certificateCopy: "她用一晚热茶，把路过的人留成了故事里的人。",
+    avatarFrameName: "茶烟夜话头像框",
+    shareCopy: "来我的茶酒肆坐坐，今晚故事归你署名。",
+    gifts: gifts("jianghu-tavern", ["青瓷茶盏", "竹简留言", "桂花酒壶", "说书醒木", "侠客折扇", "红绳灯笼", "夜雨斗笠", "檀木雅座", "满堂彩匾", "玉骨酒坛", "江湖名帖", "山河屏风"]),
+    emperorSet: { emperorSetId: "jianghu-tavern-emperor", name: "山河夜宴加冕套", diamondValue: 9999 },
+    souvenirs: souvenirs("jianghu-tavern", ["茶肆木牌", "夜话折扇", "桂花小酒壶"], "江湖茶酒肆夜话主人"),
+  }),
+  chapter({
+    chapterId: "retro-chatroom",
+    chapterName: "古早聊天室唠嗑主",
+    identityTitle: "唠嗑主",
+    identityTagline: "把在线人数聊成亲友团",
+    shortStory: "她回到古早聊天室，用表情、暗号和老派热闹，把沉默在线变成滚动弹幕。",
+    posterTitle: "聊天室重新上线",
+    posterSubtitle: "点亮十二枚聊天信号，恢复桃桃的房间人气。",
+    certificateTitle: "古早聊天室唠嗑主证书",
+    certificateCopy: "她证明了最老派的陪伴，也能重新把人召回屏幕前。",
+    avatarFrameName: "霓虹聊天头像框",
+    shareCopy: "敲门暗号已发送，来聊天室帮我点灯。",
+    gifts: gifts("retro-chatroom", ["敲门暗号", "像素笑脸", "闪烁头像", "在线铃铛", "彩虹昵称", "滚动字幕", "论坛徽章", "泡泡麦克风", "房管金牌", "千人聊天室", "复古服务器", "时代留言墙"]),
+    emperorSet: { emperorSetId: "retro-chatroom-emperor", name: "千人在线加冕套", diamondValue: 9999 },
+    souvenirs: souvenirs("retro-chatroom", ["像素名片", "聊天室贴纸", "在线铃铛"], "古早聊天室唠嗑主"),
+  }),
+  chapter({
+    chapterId: "cat-ear-muse",
+    chapterName: "猫耳声线缪斯",
+    identityTitle: "声线缪斯",
+    identityTagline: "一句晚安，点亮整面声波墙",
+    shortStory: "桃桃获得猫耳声线任务包，用声音陪伴把听众从潜水区唤到前排。",
+    posterTitle: "猫耳声线试炼",
+    posterSubtitle: "十二件声线礼物，解锁主播的缪斯身份。",
+    certificateTitle: "猫耳声线缪斯证书",
+    certificateCopy: "她让每一段声音都有被记住的形状。",
+    avatarFrameName: "猫耳声波头像框",
+    shareCopy: "今晚的声线任务，需要你来点亮。",
+    gifts: gifts("cat-ear-muse", ["猫爪便签", "软糖耳机", "晚安铃", "奶泡话筒", "粉色声波", "猫耳发箍", "心跳节拍", "月光录音棚", "缪斯音叉", "星河耳返", "声线王冠", "白金唱片"]),
+    emperorSet: { emperorSetId: "cat-ear-muse-emperor", name: "缪斯声殿加冕套", diamondValue: 9999 },
+    souvenirs: souvenirs("cat-ear-muse", ["猫爪贴纸", "晚安铃铛", "声线小卡"], "猫耳声线缪斯"),
+  }),
+  chapter({
+    chapterId: "gold-showtime",
+    chapterName: "黄金秀场名伶",
+    identityTitle: "秀场名伶",
+    identityTagline: "灯一亮，名字就该被看见",
+    shortStory: "黄金秀场重新开幕，桃桃要用十二次高光把冷场舞台唱成满堂喝彩。",
+    posterTitle: "黄金秀场开幕夜",
+    posterSubtitle: "点亮舞台礼物墙，见证名伶回归。",
+    certificateTitle: "黄金秀场名伶证书",
+    certificateCopy: "她把冷掉的聚光灯，重新唱到发烫。",
+    avatarFrameName: "黄金聚光头像框",
+    shareCopy: "今晚我站上黄金秀场，来给我一束光。",
+    gifts: gifts("gold-showtime", ["开场票根", "掌声手套", "亮片领结", "后台花束", "金色麦架", "聚光灯牌", "名伶香槟", "贵宾包厢", "黄金唱片", "星光台阶", "满堂喝彩", "不夜剧院"]),
+    emperorSet: { emperorSetId: "gold-showtime-emperor", name: "黄金剧院加冕套", diamondValue: 9999 },
+    souvenirs: souvenirs("gold-showtime", ["开场票根", "亮片徽章", "名伶小海报"], "黄金秀场名伶"),
+  }),
+  chapter({
+    chapterId: "rose-salon",
+    chapterName: "玫瑰沙龙会客厅主人",
+    identityTitle: "玫瑰沙龙会客厅主人",
+    identityTagline: "把每位来客，都邀请进自己的时代客厅",
+    shortStory: "桃桃收到玫瑰沙龙任务包，需要动员来客共同点亮礼物墙，完成女主人回归仪式。",
+    posterTitle: "玫瑰沙龙全席邀请",
+    posterSubtitle: "点亮十二件沙龙礼物，帮桃桃获封会客厅主人。",
+    certificateTitle: "玫瑰沙龙会客厅主人证书",
+    certificateCopy: "她以玫瑰为请柬，以陪伴为座次，完成了自己的沙龙重生。",
+    avatarFrameName: "玫瑰沙龙头像框",
+    shareCopy: "我的玫瑰沙龙正在点灯，来为你的座位署名。",
+    gifts: gifts("rose-salon", ["玫瑰请柬", "小折扇", "羽毛笔", "糖霜点心", "蕾丝手套", "珍珠手账", "茶会银匙", "贝母麦克风", "玫瑰马车", "水晶吊灯", "祖母绿冠冕", "鎏金画像"]),
+    emperorSet: { emperorSetId: "rose-salon-emperor", name: "玫瑰王座加冕套", diamondValue: 9999 },
+    souvenirs: souvenirs("rose-salon", ["沙龙小扇子", "玫瑰手套", "珍珠小麦克风", "女主人邀请函"], "玫瑰沙龙会客厅主人"),
+  }),
+  chapter({
+    chapterId: "cyber-anchor",
+    chapterName: "赛博电子主播",
+    identityTitle: "电子主播",
+    identityTagline: "用霓虹和电流重启直播间",
+    shortStory: "桃桃接入赛博直播核心，靠观众共同供能，点亮十二格电子身份模块。",
+    posterTitle: "赛博主播上线",
+    posterSubtitle: "十二个能量模块，启动桃桃的电子舞台。",
+    certificateTitle: "赛博电子主播证书",
+    certificateCopy: "她把直播间接入霓虹电路，重启了所有人的在线心跳。",
+    avatarFrameName: "霓虹电流头像框",
+    shareCopy: "能量槽还差一格，来帮我完成上线。",
+    gifts: gifts("cyber-anchor", ["蓝光芯片", "像素手环", "电子应援棒", "数据糖果", "银白耳机", "霓虹音轨", "能量电池", "机械麦克风", "全息跑车", "量子灯塔", "赛博王冠", "主机星舰"]),
+    emperorSet: { emperorSetId: "cyber-anchor-emperor", name: "霓虹主机加冕套", diamondValue: 9999 },
+    souvenirs: souvenirs("cyber-anchor", ["芯片贴纸", "霓虹手环", "电子签名卡"], "赛博电子主播"),
+  }),
+  chapter({
+    chapterId: "bunny-noble",
+    chapterName: "兔耳贵族厅主",
+    identityTitle: "贵族厅主",
+    identityTagline: "甜贵不是卖萌，是把来客照顾妥当",
+    shortStory: "桃桃进入兔耳贵族厅，用柔粉、浅金和陪伴任务，把普通房间经营成贵族小厅。",
+    posterTitle: "兔耳贵族厅入席",
+    posterSubtitle: "点亮十二件贵族信物，解锁甜贵厅主身份。",
+    certificateTitle: "兔耳贵族厅主证书",
+    certificateCopy: "她用甜与贵的秩序，给每个来客安排了位置。",
+    avatarFrameName: "兔耳浅金头像框",
+    shareCopy: "兔耳贵族厅正在入席，来帮我留一个名字。",
+    gifts: gifts("bunny-noble", ["奶油请安卡", "兔耳发夹", "粉糖茶杯", "浅金怀表", "蝴蝶结座牌", "贵族甜点塔", "丝绒抱枕", "月白礼盒", "浅金马车", "粉钻权杖", "兔耳王冠", "奶油宫殿"]),
+    emperorSet: { emperorSetId: "bunny-noble-emperor", name: "兔耳宫廷加冕套", diamondValue: 9999 },
+    souvenirs: souvenirs("bunny-noble", ["兔耳徽章", "浅金怀表", "奶油请柬"], "兔耳贵族厅主"),
+  }),
+  chapter({
+    chapterId: "dark-collab",
+    chapterName: "暗黑联动女王",
+    identityTitle: "联动女王",
+    identityTagline: "签下契约，把冷场变成压轴",
+    shortStory: "暗黑联动副本开启，桃桃需要观众协助完成十二件契约物点亮。",
+    posterTitle: "暗黑联动契约夜",
+    posterSubtitle: "十二枚契约印记，召回女王身份。",
+    certificateTitle: "暗黑联动女王证书",
+    certificateCopy: "她把危险副本，经营成属于自己的压轴舞台。",
+    avatarFrameName: "暗红契约头像框",
+    shareCopy: "契约已开，来为我的女王夜署名。",
+    gifts: gifts("dark-collab", ["暗红烛火", "银色锁扣", "契约羽笔", "夜雾面具", "黑紫请柬", "暗纹披肩", "联动徽章", "冷银麦克风", "女王马车", "血月吊灯", "契约王冠", "终夜王座"]),
+    emperorSet: { emperorSetId: "dark-collab-emperor", name: "终夜女王加冕套", diamondValue: 9999 },
+    souvenirs: souvenirs("dark-collab", ["契约小卡", "暗红徽章", "银锁纪念章"], "暗黑联动女王"),
+  }),
+  chapter({
+    chapterId: "pico-gilded-hall",
+    chapterName: "PICO 鎏金殿堂主播",
+    identityTitle: "殿堂主播",
+    identityTagline: "从重生章节，走到鎏金殿堂",
+    shortStory: "最终章中，桃桃把此前所有陪伴沉淀为殿堂通行证，完成时代主播图鉴的终章。",
+    posterTitle: "PICO 鎏金殿堂",
+    posterSubtitle: "点亮十二座殿堂灯塔，完成主播时代终章。",
+    certificateTitle: "PICO 鎏金殿堂主播证书",
+    certificateCopy: "她把每一次点亮，都沉淀成可以被回看的时代档案。",
+    avatarFrameName: "PICO 鎏金殿堂头像框",
+    shareCopy: "我的殿堂终章还差你的名字。",
+    gifts: gifts("pico-gilded-hall", ["殿堂门票", "鎏金灯芯", "时代徽章", "主播纪念册", "贵宾台阶", "星环麦克风", "殿堂回声", "黄金座牌", "鎏金马车", "星河王冠", "时代长廊", "PICO 殿堂"]),
+    emperorSet: { emperorSetId: "pico-gilded-hall-emperor", name: "PICO 殿堂加冕套", diamondValue: 9999 },
+    souvenirs: souvenirs("pico-gilded-hall", ["殿堂徽章", "鎏金门票", "时代小卡", "星环贴纸"], "PICO 鎏金殿堂主播"),
+  }),
+];
+
+export const defaultChapterId = "rose-salon";

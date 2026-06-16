@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>静观立方体</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="sacred-cube" data-sacred-cube>
+      <canvas class="sky" data-sky aria-hidden="true"></canvas>
+
+      <section class="experience" aria-label="静观立方体交互组件">
+        <div class="copy">
+          <p class="eyebrow">Contemplative Cube</p>
+          <h1>静观立方体</h1>
+          <p>
+            这是一个受神圣建筑秩序启发的抽象交互组件。拖动立方体，调节光的强度，让视觉节奏慢下来。
+          </p>
+        </div>
+
+        <div class="ritual-space" aria-live="polite">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="floor-glow"></div>
+          <div class="cube-wrap" aria-label="可拖动的立方体">
+            <div class="cube" data-cube>
+              <div class="face front">
+                <span class="gold-band"></span>
+                <span class="door"></span>
+              </div>
+              <div class="face back"><span class="gold-band"></span></div>
+              <div class="face right"><span class="gold-band"></span></div>
+              <div class="face left"><span class="gold-band"></span></div>
+              <div class="face top"></div>
+              <div class="face bottom"></div>
+            </div>
+          </div>
+          <div class="veil"></div>
+        </div>
+
+        <div class="controls" aria-label="交互控制">
+          <label class="control-range">
+            <span>静观强度</span>
+            <input data-intensity type="range" min="0" max="100" value="58" />
+          </label>
+          <button type="button" data-orbit-toggle aria-pressed="true">环绕</button>
+          <button type="button" data-veil-toggle aria-pressed="false">光幕</button>
+          <button type="button" data-reset>归中</button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./sacred-cube.mjs"></script>
+  </body>
+</html>
